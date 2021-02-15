@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: _openCamera,
           tooltip: 'Make post',
-          child: Icon(Icons.add),
+          child: Icon(Icons.add_a_photo),
         ),
       );
     }
