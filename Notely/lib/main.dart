@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -31,7 +32,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  SearchBar searchBar; //Search bar object
   File _image; //Will be used to store and reference the image taken or chosen by the user.
+
+  //Constructor for this instantiates searchBar
+  _MyHomePageState() {
+    searchBar = new SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
+  }
+
+  //Function that builds the appbar and returns it.
+  AppBar buildAppBar(BuildContext context) {
+    return new AppBar(
+      title: new Text(widget.title),
+      actions: [searchBar.getSearchAction(context)],
+    );
+  }
 
   //Called when the user hits the plus button. Calls showPicker which opens up the modul on the bottom of the screen
   void _openCamera() {
@@ -43,9 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Dirty temporary code used to display the image chosen or taken as a proof of concept of the camera system. This will get removed.
     if (_image == null) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
+        appBar: searchBar.build(context),
         floatingActionButton: FloatingActionButton(
           onPressed: _openCamera,
           tooltip: 'Make post',
@@ -54,9 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
+        appBar: searchBar.build(context),
         body: new Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(
