@@ -107,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
     File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
 
     setState(() {
+      imageCache.clear();
       _image = image;
     });
   }
@@ -115,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
 
     setState(() {
+      imageCache.clear();
       _image = image;
     });
   }
