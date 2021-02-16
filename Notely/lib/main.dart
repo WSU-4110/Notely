@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               DrawerHeader(
                 child: Text('Drawer Header'),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               ListTile(
@@ -89,6 +89,27 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return Scaffold(
         appBar: searchBar.build(context),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+              ),
+              ListTile(
+                title: Text('Item 1'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                leading: Icon(Icons.settings),
+              ),
+            ],
+          ),
+        ),
         body: new Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(
