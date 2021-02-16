@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Notely'),
@@ -32,21 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SearchBar searchBar; //Search bar object
   File _image; //Will be used to store and reference the image taken or chosen by the user.
-
-  //Constructor for this instantiates searchBar
-  _MyHomePageState() {
-    searchBar = new SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
-  }
-
-  //Function that builds the appbar and returns it.
-  AppBar buildAppBar(BuildContext context) {
-    return new AppBar(
-      title: new Text(widget.title),
-      actions: [searchBar.getSearchAction(context)],
-    );
-  }
 
   //Called when the user hits the plus button. Calls showPicker which opens up the modul on the bottom of the screen
   void _openCamera() {
@@ -58,11 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
     //Dirty temporary code used to display the image chosen or taken as a proof of concept of the camera system. This will get removed.
     if (_image == null) {
       return Scaffold(
-        appBar: searchBar.build(context),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _openCamera,
-          tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
+        appBar: AppBar(
+          title: Text(widget.title,),
+          leading: Icon(Icons.menu, color: Colors.white),
         ),
         drawer: Drawer(
           child: ListView(
@@ -77,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: Text('Item 1'),
                 leading: Icon(Icons.message),
-              ),
+                ),
               ListTile(
                 title: Text('Item 2'),
                 leading: Icon(Icons.settings),
@@ -85,10 +68,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _openCamera,
+          tooltip: 'Make post',
+          child: Icon(Icons.add),
+        ),
       );
     } else {
       return Scaffold(
-        appBar: searchBar.build(context),
+        appBar: AppBar(
+          title: Text(widget.title, 
+            //style: new TextStyle (fontFamily: 'MontserratAlternates',),
+          ),
+        ),
         body: new Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(
@@ -100,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: _openCamera,
           tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
+          child: Icon(Icons.add),
         ),
       );
     }
