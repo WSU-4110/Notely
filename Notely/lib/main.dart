@@ -69,17 +69,25 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.zero,
             children: const <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
+                child: Text('Menu'),
                 decoration: BoxDecoration(
                   color: Colors.green,
                 ),
               ),
               ListTile(
-                title: Text('Item 1'),
+                title: Text('Profile'),
                 leading: Icon(Icons.message),
               ),
               ListTile(
-                title: Text('Item 2'),
+                title: Text('Favorites'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Advanced Search'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Settings'),
                 leading: Icon(Icons.settings),
               ),
             ],
@@ -94,17 +102,25 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.zero,
             children: const <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
+                child: Text('Menu'),
                 decoration: BoxDecoration(
                   color: Colors.green,
                 ),
               ),
               ListTile(
-                title: Text('Item 1'),
+                title: Text('Profile'),
                 leading: Icon(Icons.message),
               ),
               ListTile(
-                title: Text('Item 2'),
+                title: Text('Favorites'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Advanced Search'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Settings'),
                 leading: Icon(Icons.settings),
               ),
             ],
