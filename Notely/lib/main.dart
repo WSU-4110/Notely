@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:
-          'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
+      title: 'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -34,24 +33,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SearchBar searchBar; //Search bar object
-  File
-      _image; //Will be used to store and reference the image taken or chosen by the user.
+  File _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = new SearchBar(
-        inBar: false,
-        setState: setState,
-        onSubmitted: print,
-        buildDefaultAppBar: buildAppBar);
+    searchBar = SearchBar(
+      inBar: false,
+      setState: setState,
+      onSubmitted: print,
+      buildDefaultAppBar: buildAppBar
+    );
   }
 
   //Function that builds the appbar and returns it.
   AppBar buildAppBar(BuildContext context) {
+    //This should contain the searchbar and hamburger button i think?
     return new AppBar(
       title: new Text(widget.title),
       actions: [searchBar.getSearchAction(context)],
-      //Add hamburger button to leading?
     );
   }
 
@@ -80,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             ListTile(
+              //Each ListTile here should have an onTap() to pull out their respective menus
               title: Text('Profile'),
               leading: Icon(Icons.account_circle),
             ),
@@ -118,8 +118,9 @@ class _MyHomePageState extends State<MyHomePage> {
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
     File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
-
+      source: ImageSource.gallery, 
+      imageQuality: 50
+    );
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
@@ -127,34 +128,36 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  //Function is used to display the modul at the bottom of the screen when the plus button is selected.
+  //Function is used to display the module at the bottom of the screen when the plus button is selected.
   void _showPicker(context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: new Wrap(
-                children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
-                      onTap: () {
-                        _imgFromGallery(); //Function call for picking an image from the gallery
-                        Navigator.of(context).pop();
-                      }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
-                    onTap: () {
-                      _imgFromCamera(); //Function call for taking an image with the camera
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Container(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.photo_library),
+                  title: Text('Photo Library'),
+                  onTap: () {
+                    _imgFromGallery(); //Function call for picking an image from the gallery
+                    Navigator.of(context).pop();
+                  } 
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo_camera),
+                  title: Text('Camera'),
+                  onTap: () {
+                    _imgFromCamera(); //Function call for taking an image with the camera
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      }
+    );
   }
 }
