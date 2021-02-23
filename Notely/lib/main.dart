@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
+      title:
+          'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
+  final String title; //We should change this to hold our logo image file
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -33,11 +34,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SearchBar searchBar; //Search bar object
-  File _image; //Will be used to store and reference the image taken or chosen by the user.
+  File
+      _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = new SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
+    searchBar = new SearchBar(
+        inBar: false,
+        setState: setState,
+        onSubmitted: print,
+        buildDefaultAppBar: buildAppBar);
   }
 
   //Function that builds the appbar and returns it.
@@ -45,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return new AppBar(
       title: new Text(widget.title),
       actions: [searchBar.getSearchAction(context)],
+      //Add hamburger button to leading?
     );
   }
 
@@ -55,98 +62,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //Dirty temporary code used to display the image chosen or taken as a proof of concept of the camera system. This will get removed.
-    if (_image == null) {
-      return Scaffold(
-        appBar: searchBar.build(context),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _openCamera,
-          tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const <Widget>[
-              DrawerHeader(
-                child: Text('Menu'),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                ),
+    return Scaffold(
+      appBar: searchBar.build(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _openCamera,
+        tooltip: 'Make post',
+        child: Icon(Icons.add_a_photo),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              child: Text('Menu'),
+              decoration: BoxDecoration(
+                color: Colors.green,
               ),
-              ListTile(
-                title: Text('Profile'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Favorites'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Advanced Search'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Settings'),
-                leading: Icon(Icons.settings),
-              ),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return Scaffold(
-        appBar: searchBar.build(context),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const <Widget>[
-              DrawerHeader(
-                child: Text('Menu'),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                ),
-              ),
-              ListTile(
-                title: Text('Profile'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Favorites'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Advanced Search'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Settings'),
-                leading: Icon(Icons.settings),
-              ),
-            ],
-          ),
-        ),
-        body: new Container(
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage(_image.path),
-              fit: BoxFit.cover,
             ),
-          ),
+            ListTile(
+              title: Text('Profile'),
+              leading: Icon(Icons.account_circle),
+            ),
+            ListTile(
+              title: Text('Favorites'),
+              leading: Icon(Icons.book_outlined),
+            ),
+            ListTile(
+              title: Text('Advanced Search'),
+              leading: Icon(Icons.eco_outlined),
+            ),
+            ListTile(
+              title: Text('Settings'),
+              leading: Icon(Icons.settings),
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _openCamera,
-          tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
-        ),
-      );
-    }
+      ),
+    );
   }
 
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
@@ -158,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
