@@ -34,16 +34,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SearchBar searchBar; //Search bar object
-  File
-      _image; //Will be used to store and reference the image taken or chosen by the user.
+
+  File _image; //Will be used to store and reference the image taken or chosen by the user.
+
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = new SearchBar(
-        inBar: false,
-        setState: setState,
-        onSubmitted: print,
-        buildDefaultAppBar: buildAppBar);
+    searchBar = new SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
   }
 
   //Function that builds the appbar and returns it.
@@ -64,45 +61,72 @@ class _MyHomePageState extends State<MyHomePage> {
     //Dirty temporary code used to display the image chosen or taken as a proof of concept of the camera system. This will get removed.
     if (_image == null) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            widget.title,
-          ),
-          leading: Icon(Icons.menu, color: Colors.white),
+        appBar: searchBar.build(context),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _openCamera,
+          tooltip: 'Make post',
+          child: Icon(Icons.add_a_photo),
         ),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: const <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
+                child: Text('Menu'),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               ListTile(
-                title: Text('Item 1'),
+                title: Text('Profile'),
                 leading: Icon(Icons.message),
               ),
               ListTile(
-                title: Text('Item 2'),
+                title: Text('Favorites'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Advanced Search'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Settings'),
                 leading: Icon(Icons.settings),
               ),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _openCamera,
-          tooltip: 'Make post',
-          child: Icon(Icons.add),
-        ),
       );
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            widget.title,
-            //style: new TextStyle (fontFamily: 'MontserratAlternates',),
+        appBar: searchBar.build(context),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const <Widget>[
+              DrawerHeader(
+                child: Text('Menu'),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+              ),
+              ListTile(
+                title: Text('Profile'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Favorites'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Advanced Search'),
+                leading: Icon(Icons.message),
+              ),
+              ListTile(
+                title: Text('Settings'),
+                leading: Icon(Icons.settings),
+              ),
+            ],
           ),
         ),
         body: new Container(
