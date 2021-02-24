@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -12,10 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:
-          'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
+      title: 'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Notely'),
@@ -33,26 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SearchBar searchBar; //Search bar object
-  File
-      _image; //Will be used to store and reference the image taken or chosen by the user.
-
-  //Constructor for this instantiates searchBar
-  _MyHomePageState() {
-    searchBar = new SearchBar(
-        inBar: false,
-        setState: setState,
-        onSubmitted: print,
-        buildDefaultAppBar: buildAppBar);
-  }
-
-  //Function that builds the appbar and returns it.
-  AppBar buildAppBar(BuildContext context) {
-    return new AppBar(
-      title: new Text(widget.title),
-      actions: [searchBar.getSearchAction(context)],
-    );
-  }
+  File _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Called when the user hits the plus button. Calls showPicker which opens up the modul on the bottom of the screen
   void _openCamera() {
@@ -65,9 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_image == null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.title,
-          ),
+          title: Text(widget.title,),
           leading: Icon(Icons.menu, color: Colors.white),
         ),
         drawer: Drawer(
@@ -83,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: Text('Item 1'),
                 leading: Icon(Icons.message),
-              ),
+                ),
               ListTile(
                 title: Text('Item 2'),
                 leading: Icon(Icons.settings),
@@ -100,8 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.title,
+          title: Text(widget.title, 
             //style: new TextStyle (fontFamily: 'MontserratAlternates',),
           ),
         ),
@@ -116,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: _openCamera,
           tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
+          child: Icon(Icons.add),
         ),
       );
     }
@@ -125,8 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
+    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
@@ -138,8 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
