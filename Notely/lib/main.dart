@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
+  final String title; //We should change this to hold our logo image file
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,11 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = new SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
+    searchBar = SearchBar(
+      inBar: false,
+      setState: setState,
+      onSubmitted: print,
+      buildDefaultAppBar: buildAppBar
+    );
   }
 
   //Function that builds the appbar and returns it.
   AppBar buildAppBar(BuildContext context) {
+    //This should contain the searchbar and hamburger button i think?
     return new AppBar(
       title: new Text(widget.title),
       actions: [searchBar.getSearchAction(context)],
@@ -58,92 +64,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //Dirty temporary code used to display the image chosen or taken as a proof of concept of the camera system. This will get removed.
-    if (_image == null) {
-      return Scaffold(
-        appBar: searchBar.build(context),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _openCamera,
-          tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const <Widget>[
-              DrawerHeader(
-                child: Text('Menu'),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                ),
+    return Scaffold(
+      appBar: searchBar.build(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _openCamera,
+        tooltip: 'Make post',
+        child: Icon(Icons.add_a_photo),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              child: Text('Menu'),
+              decoration: BoxDecoration(
+                color: Colors.green,
               ),
-              ListTile(
-                title: Text('Profile'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Favorites'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Advanced Search'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Settings'),
-                leading: Icon(Icons.settings),
-              ),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return Scaffold(
-        appBar: searchBar.build(context),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const <Widget>[
-              DrawerHeader(
-                child: Text('Menu'),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                ),
-              ),
-              ListTile(
-                title: Text('Profile'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Favorites'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Advanced Search'),
-                leading: Icon(Icons.message),
-              ),
-              ListTile(
-                title: Text('Settings'),
-                leading: Icon(Icons.settings),
-              ),
-            ],
-          ),
-        ),
-        body: new Container(
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage(_image.path),
-              fit: BoxFit.cover,
             ),
-          ),
+            ListTile(
+              //Each ListTile here should have an onTap() to pull out their respective menus
+              title: Text('Profile'),
+              leading: Icon(Icons.account_circle),
+            ),
+            ListTile(
+              title: Text('Favorites'),
+              leading: Icon(Icons.book_outlined),
+            ),
+            ListTile(
+              title: Text('Advanced Search'),
+              leading: Icon(Icons.eco_outlined),
+            ),
+            ListTile(
+              title: Text('Settings'),
+              leading: Icon(Icons.settings),
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _openCamera,
-          tooltip: 'Make post',
-          child: Icon(Icons.add_a_photo),
-        ),
-      );
-    }
+      ),
+    );
   }
 
   //Called if the user selects the option to take a picture
@@ -163,8 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
     File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
 
+      source: ImageSource.gallery, 
+      imageQuality: 50
+    );
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
@@ -172,34 +132,36 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  //Function is used to display the modul at the bottom of the screen when the plus button is selected.
+  //Function is used to display the module at the bottom of the screen when the plus button is selected.
   void _showPicker(context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: new Wrap(
-                children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
-                      onTap: () {
-                        _imgFromGallery(); //Function call for picking an image from the gallery
-                        Navigator.of(context).pop();
-                      }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
-                    onTap: () {
-                      _imgFromCamera(); //Function call for taking an image with the camera
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Container(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.photo_library),
+                  title: Text('Photo Library'),
+                  onTap: () {
+                    _imgFromGallery(); //Function call for picking an image from the gallery
+                    Navigator.of(context).pop();
+                  } 
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo_camera),
+                  title: Text('Camera'),
+                  onTap: () {
+                    _imgFromCamera(); //Function call for taking an image with the camera
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      }
+    );
   }
 }
