@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
+      title:
+          'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -33,7 +34,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SearchBar searchBar; //Search bar object
+
   File _image; //Will be used to store and reference the image taken or chosen by the user.
+
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
@@ -118,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
     File image = await ImagePicker.pickImage(
+
       source: ImageSource.gallery, 
       imageQuality: 50
     );
