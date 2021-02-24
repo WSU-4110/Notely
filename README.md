@@ -44,9 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_image == null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.title,
-          ),
+          title: Text(widget.title,),
           leading: Icon(Icons.menu, color: Colors.white),
         ),
         drawer: Drawer(
@@ -62,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: Text('Item 1'),
                 leading: Icon(Icons.message),
-              ),
+                ),
               ListTile(
                 title: Text('Item 2'),
                 leading: Icon(Icons.settings),
@@ -79,8 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.title,
+          title: Text(widget.title, 
             //style: new TextStyle (fontFamily: 'MontserratAlternates',),
           ),
         ),
