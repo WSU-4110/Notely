@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:
-          'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
+      title: 'Notely', //The title here and the one below will eventually change since a logo will be used instead of a string for the title
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -37,15 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   File _image; //Will be used to store and reference the image taken or chosen by the user.
 
-
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = SearchBar(
-      inBar: false,
-      setState: setState,
-      onSubmitted: print,
-      buildDefaultAppBar: buildAppBar
-    );
+    searchBar = SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
   }
 
   //Function that builds the appbar and returns it.
@@ -107,8 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
+    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
@@ -120,11 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-
-      source: ImageSource.gallery, 
-      imageQuality: 50
-    );
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
@@ -135,33 +123,31 @@ class _MyHomePageState extends State<MyHomePage> {
   //Function is used to display the module at the bottom of the screen when the plus button is selected.
   void _showPicker(context) {
     showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return SafeArea(
-          child: Container(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.photo_library),
-                  title: Text('Photo Library'),
-                  onTap: () {
-                    _imgFromGallery(); //Function call for picking an image from the gallery
-                    Navigator.of(context).pop();
-                  } 
-                ),
-                ListTile(
-                  leading: Icon(Icons.photo_camera),
-                  title: Text('Camera'),
-                  onTap: () {
-                    _imgFromCamera(); //Function call for taking an image with the camera
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: Wrap(
+                children: <Widget>[
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery(); //Function call for picking an image from the gallery
+                        Navigator.of(context).pop();
+                      }),
+                  ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera(); //Function call for taking an image with the camera
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 }
