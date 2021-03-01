@@ -35,17 +35,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   SearchBar searchBar; //Search bar object
 
-  File _image; //Will be used to store and reference the image taken or chosen by the user.
-
+  File
+      _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
     searchBar = SearchBar(
-      inBar: false,
-      setState: setState,
-      onSubmitted: print,
-      buildDefaultAppBar: buildAppBar
-    );
+        inBar: false,
+        setState: setState,
+        onSubmitted: print,
+        buildDefaultAppBar: buildAppBar);
   }
 
   //Function that builds the appbar and returns it.
@@ -87,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.account_circle),
             ),
             ListTile(
-              title: Text('Favorites'),
+              title: const Text('Favorites'),
               leading: Icon(Icons.book_outlined),
             ),
             ListTile(
@@ -121,10 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
     File image = await ImagePicker.pickImage(
-
-      source: ImageSource.gallery, 
-      imageQuality: 50
-    );
+        source: ImageSource.gallery, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
@@ -135,33 +131,31 @@ class _MyHomePageState extends State<MyHomePage> {
   //Function is used to display the module at the bottom of the screen when the plus button is selected.
   void _showPicker(context) {
     showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return SafeArea(
-          child: Container(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.photo_library),
-                  title: Text('Photo Library'),
-                  onTap: () {
-                    _imgFromGallery(); //Function call for picking an image from the gallery
-                    Navigator.of(context).pop();
-                  } 
-                ),
-                ListTile(
-                  leading: Icon(Icons.photo_camera),
-                  title: Text('Camera'),
-                  onTap: () {
-                    _imgFromCamera(); //Function call for taking an image with the camera
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: Wrap(
+                children: <Widget>[
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery(); //Function call for picking an image from the gallery
+                        Navigator.of(context).pop();
+                      }),
+                  ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera(); //Function call for taking an image with the camera
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 }
