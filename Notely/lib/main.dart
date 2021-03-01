@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:Notely/favorites.dart';
 
 void main() {
   runApp(MyApp());
@@ -73,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
+          children: <Widget>[
             DrawerHeader(
               child: Text('Menu'),
               decoration: BoxDecoration(
@@ -86,8 +87,11 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.account_circle),
             ),
             ListTile(
-              title: const Text('Favorites'),
+              title: Text('Favorites'),
               leading: Icon(Icons.book_outlined),
+              onTap: () {
+                openFavorites(context);
+              },
             ),
             ListTile(
               title: Text('Advanced Search'),
