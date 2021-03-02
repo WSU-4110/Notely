@@ -23,7 +23,7 @@ class _RegisterState extends State<Register> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.green[400],
+          backgroundColor: Colors.green,
           elevation: 0.0,
           title: Text('Sign up to Notely'),
           actions: <Widget>[
