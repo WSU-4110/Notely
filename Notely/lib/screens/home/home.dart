@@ -1,8 +1,11 @@
+import 'package:Notely/models/user.dart';
 import 'package:Notely/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'package:provider/provider.dart';
 
 /*
 class Home extends StatelessWidget {
@@ -24,8 +27,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  dynamic userInfo;
+
   SearchBar searchBar; //Search bar object
+
   final AuthService _auth = AuthService();
+
   File _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
@@ -35,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Function that builds the appbar and returns it.
   AppBar buildAppBar(BuildContext context) {
+    userInfo = Provider.of<User>(context);
     //This should contain the searchbar and hamburger button i think?
     return new AppBar(
       backgroundColor: Colors.green,
