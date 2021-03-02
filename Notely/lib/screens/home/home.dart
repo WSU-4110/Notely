@@ -1,23 +1,18 @@
-import 'package:Notely/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This is the root of the application.
+/*
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Wrapper(),
+    return Container(
+      child: Text('Home'),
     );
   }
 }
-/*
+*/
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -150,4 +145,4 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         });
   }
-}*/
+}
