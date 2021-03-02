@@ -1,8 +1,8 @@
+import 'package:Notely/models/user.dart';
 import 'package:Notely/screens/wrapper.dart';
+import 'package:Notely/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +12,11 @@ class MyApp extends StatelessWidget {
   // This is the root of the application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Wrapper(),
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+        home: Wrapper(),
+      ),
     );
   }
 }

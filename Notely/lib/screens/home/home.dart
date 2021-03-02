@@ -1,3 +1,4 @@
+import 'package:Notely/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,7 +25,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SearchBar searchBar; //Search bar object
-
+  final AuthService _auth = AuthService();
   File _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
@@ -36,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   AppBar buildAppBar(BuildContext context) {
     //This should contain the searchbar and hamburger button i think?
     return new AppBar(
+      backgroundColor: Colors.green,
       title: new Text(widget.title),
       actions: [searchBar.getSearchAction(context)],
     );
@@ -51,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: searchBar.build(context),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
         onPressed: _openCamera,
         tooltip: 'Make post',
         child: Icon(Icons.add_a_photo),
@@ -58,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
+          children: <Widget>[
             DrawerHeader(
               child: Text('Menu'),
               decoration: BoxDecoration(
@@ -83,8 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.settings),
             ),
             ListTile(
-              title: Text('Settings'),
-              leading: Icon(Icons.settings),
+              title: Text('Sign out'),
+              leading: Icon(Icons.person),
+              onTap: () async {
+                await _auth.signOut();
+              },
             ),
           ],
         ),
