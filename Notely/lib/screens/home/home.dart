@@ -1,0 +1,167 @@
+import 'package:Notely/models/user.dart';
+import 'package:Notely/services/auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:Notely/settings.dart';
+
+import 'package:provider/provider.dart';
+
+/*
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('Home'),
+    );
+  }
+}
+*/
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title; //We should change this to hold our logo image file
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  dynamic userInfo;
+
+  SearchBar searchBar; //Search bar object
+
+  final AuthService _auth = AuthService();
+
+  File _image; //Will be used to store and reference the image taken or chosen by the user.
+
+  //Constructor for this instantiates searchBar
+  _MyHomePageState() {
+    searchBar = SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
+  }
+
+  //Function that builds the appbar and returns it.
+  AppBar buildAppBar(BuildContext context) {
+    userInfo = Provider.of<User>(context);
+    //This should contain the searchbar and hamburger button i think?
+    return new AppBar(
+      backgroundColor: Colors.green,
+      title: new Text(widget.title),
+      actions: [searchBar.getSearchAction(context)],
+    );
+  }
+
+  //Called when the user hits the plus button. Calls showPicker which opens up the modul on the bottom of the screen
+  void _openCamera() {
+    _showPicker(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: searchBar.build(context),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        onPressed: _openCamera,
+        tooltip: 'Make post',
+        child: Icon(Icons.add_a_photo),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Menu'),
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+            ),
+            ListTile(
+              //Each ListTile here should have an onTap() to pull out their respective menus
+              title: Text('Profile'),
+              leading: Icon(Icons.account_circle),
+            ),
+            ListTile(
+              title: Text('Favorites'),
+              leading: Icon(Icons.book_outlined),
+            ),
+            ListTile(
+              title: Text('Advanced Search'),
+              leading: Icon(Icons.eco_outlined),
+            ),
+            ListTile(
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()));
+              }, // Function call for settings page.
+              leading: Icon(Icons.settings),
+            ),
+            ListTile(
+              title: Text('Sign out'),
+              leading: Icon(Icons.person),
+              onTap: () async {
+                await _auth.signOut();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  //Called if the user selects the option to take a picture
+  _imgFromCamera() async {
+    //Waits for the user to take a picture and stores it in File object
+    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
+
+    //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
+    setState(() {
+      imageCache.clear();
+      _image = image;
+    });
+  }
+
+  //Called if the user selects the option to pick an image from their gallery
+  _imgFromGallery() async {
+    //Waits for the user to select a picture and stores it in File object
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
+    setState(() {
+      imageCache.clear();
+      _image = image;
+    });
+  }
+
+  //Function is used to display the module at the bottom of the screen when the plus button is selected.
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: Wrap(
+                children: <Widget>[
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery(); //Function call for picking an image from the gallery
+                        Navigator.of(context).pop();
+                      }),
+                  ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera(); //Function call for taking an image with the camera
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
