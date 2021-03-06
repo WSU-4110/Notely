@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:Notely/settings.dart';
 
 import 'package:provider/provider.dart';
 
@@ -91,6 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Text('Settings'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()));
+              }, // Function call for settings page.
               leading: Icon(Icons.settings),
             ),
             ListTile(
