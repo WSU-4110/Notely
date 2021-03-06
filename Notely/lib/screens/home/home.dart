@@ -5,7 +5,7 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:Notely/settings.dart';
-
+import 'package:Notely/favorites.dart';
 import 'package:provider/provider.dart';
 
 /*
@@ -85,6 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               title: Text('Favorites'),
               leading: Icon(Icons.book_outlined),
+              onTap: () {
+                openFavorites(context);
+              },
             ),
             ListTile(
               title: Text('Advanced Search'),
