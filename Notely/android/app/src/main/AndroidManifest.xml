@@ -11,7 +11,6 @@
         tools:replace="android:label"
         android:name="io.flutter.app.FlutterApplication"
         android:label="Notely">
-        
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
