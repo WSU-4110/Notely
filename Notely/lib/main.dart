@@ -3,6 +3,9 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']; //Stored values for list to read
+//final List<int> colorCodes = <int>[1000, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450];
+
 void main() {
   runApp(MyApp());
 }
@@ -59,6 +62,32 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
+
+
+
+      //Creates a listview widget on homepage
+      body: ListView.separated( //.separated creates spaces in between items
+        padding: const EdgeInsets.all(8), //creates padding on inside of tiles
+        itemCount: entries.length,  //Counts length of entry list
+        itemBuilder: (BuildContext context, int index) 
+        {
+          return Container  //Basically makes a tile widget
+          (
+            height: 50,
+            color: Colors.amber[600],
+            child: Center(child: Text('Entry ${entries[index]}')),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) => const Divider(), //inserts the spaces in between tiles
+      ),
+
+
+
+
+
+
+
+
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'Make post',
