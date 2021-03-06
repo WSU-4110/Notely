@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:Notely/settings.dart';
-import 'package:Notely/favorites.dart';
+import 'package:Notely/screens/settings.dart';
+import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
 
 /*
