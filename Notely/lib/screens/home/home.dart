@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,34 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
+
+Widget _buildListItem(BuildContext context, DocumentSnapshot document){
+  return ListTile(
+    title: Row(
+      children: [
+        Expanded(
+          child: Text(
+            document['title'],
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        ),
+        Container(
+          decoration: const BoxDecoration(
+            color: Color(0xffddddff),
+          ),
+          padding: const EdgeInsets.all(10.0),
+          child: Text(
+            document['data'],
+            style: Theme.of(context).textTheme.display1,
+          ),
+        ),
+      ],
+    ),
+    onTap: (){print("This almost works");}
+  );
+}
+
 
 class _MyHomePageState extends State<MyHomePage> {
   dynamic userInfo;
@@ -56,10 +85,32 @@ class _MyHomePageState extends State<MyHomePage> {
     _showPicker(context);
   }
 
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
+
+      body: StreamBuilder(
+        stream: Firestore.instance.collection('Posts').snapshots(),
+        builder: (context, snapshot){
+          if (!snapshot.hasData) return const Text('Loading...');
+          return ListView.builder(
+            itemExtent: 80.0,
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index]),
+            );
+        }),
+
+
+
+
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: _openCamera,
