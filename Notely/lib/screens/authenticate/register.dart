@@ -23,13 +23,13 @@ class _RegisterState extends State<Register> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.tealAccent.shade400,
           elevation: 0.0,
-          title: Text('Sign up to Notely'),
+          title: Text('Sign up to Notely',),
           actions: <Widget>[
             FlatButton.icon(
-                icon: Icon(Icons.person),
-                label: Text('Sign In'),
+                icon: Icon(Icons.person, color: Colors.white,),
+                label: Text('Sign In', style: TextStyle(color: Colors.white)),
                 onPressed: () {
                   widget.toggleView();
                 })
@@ -44,7 +44,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 20.0),
                   TextFormField(
                     decoration: const InputDecoration(
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.person, ),
                       hintText: 'Enter a email',
                       labelText: 'Email',
                     ),
@@ -68,8 +68,8 @@ class _RegisterState extends State<Register> {
                   ),
                   SizedBox(height: 20.0),
                   RaisedButton(
-                      color: Colors.green,
-                      child: Text('Register', style: TextStyle(color: Colors.white)),
+                      color: Colors.tealAccent.shade400,
+                      child: Text('Register', style: TextStyle(color: Colors.white,)),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           dynamic result = await _auth.registerWithEmailAndPassword(email, password);

@@ -23,13 +23,13 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.tealAccent.shade400,
           elevation: 0.0,
           title: Text('Sign in to Notely'),
           actions: <Widget>[
             FlatButton.icon(
-                icon: Icon(Icons.person),
-                label: Text('Register'),
+                icon: Icon(Icons.person, color: Colors.white,),
+                label: Text('Register', style: TextStyle(color: Colors.white),),
                 onPressed: () {
                   widget.toggleView();
                 })
@@ -68,7 +68,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(height: 20.0),
                   RaisedButton(
-                      color: Colors.green,
+                      color: Colors.tealAccent.shade400,
                       child: Text('Sign in', style: TextStyle(color: Colors.white)),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
