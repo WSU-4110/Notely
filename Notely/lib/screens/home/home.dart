@@ -7,17 +7,8 @@ import 'dart:io';
 import 'package:Notely/screens/settings.dart';
 import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
+import 'package:Notely/screens/profile.dart';
 
-/*
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('Home'),
-    );
-  }
-}
-*/
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -79,6 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
               //Each ListTile here should have an onTap() to pull out their respective menus
               title: Text('Profile'),
               leading: Icon(Icons.account_circle),
+              onTap: () {
+                openProfile(context);
+              },
             ),
             ListTile(
               title: Text('Favorites'),
