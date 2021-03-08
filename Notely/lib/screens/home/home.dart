@@ -7,7 +7,6 @@ import 'dart:io';
 import 'package:Notely/screens/settings.dart';
 import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
-import 'package:Notely/screens/profile.dart';
 
 /*
 class Home extends StatelessWidget {
@@ -47,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
     userInfo = Provider.of<User>(context);
     //This should contain the searchbar and hamburger button i think?
     return new AppBar(
-      title: new Text('Notely', style: TextStyle(fontFamily: 'MontserratAlternates',)),
+      backgroundColor: Colors.green,
+      title: new Text(widget.title),
       actions: [searchBar.getSearchAction(context)],
     );
   }
@@ -62,27 +62,25 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: searchBar.build(context),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
         onPressed: _openCamera,
         tooltip: 'Make post',
-        child: Icon(Icons.add_a_photo, color: Colors.white,),
+        child: Icon(Icons.add_a_photo),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Menu', style: TextStyle( color: Colors.white,),),
+              child: Text('Menu'),
               decoration: BoxDecoration(
-                color: Colors.tealAccent.shade400,
+                color: Colors.green,
               ),
             ),
             ListTile(
               //Each ListTile here should have an onTap() to pull out their respective menus
               title: Text('Profile'),
               leading: Icon(Icons.account_circle),
-              onTap: () {
-                openProfile(context);
-              },
             ),
             ListTile(
               title: Text('Favorites'),
