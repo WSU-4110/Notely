@@ -51,6 +51,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
+      body: ListView.separated  //Creates a separated list of tiles to appear on the main page
+      (
+        itemBuilder: (BuildContext context, int index)  //Creates items to appear in the list
+        {
+          return ListTile   //This widget will probably be changed to something else, or at least given a clicking ability
+          (
+            title: Text('item $index')  //Displays the number on the tile
+          );
+        }, 
+        separatorBuilder: (BuildContext context, int index) => Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
+        itemCount: 40, //This will change to an infinite scroll later
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'Make post',
