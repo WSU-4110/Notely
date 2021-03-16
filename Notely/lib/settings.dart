@@ -18,6 +18,13 @@ class SettingsPage extends StatelessWidget {
           tiles: [
             // Individual tiles
             SettingsTile(
+              title: 'Back',
+              leading: Icon(Icons.arrow_back_ios),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            SettingsTile(
               title: 'Language',
               subtitle: 'English',
               leading: Icon(Icons.language),
@@ -87,13 +94,6 @@ class SettingsPage extends StatelessWidget {
                 leading: Icon(Icons.lock),
                 switchValue: privateAccountValue,
                 onToggle: (bool value) {},
-              ),
-              SettingsTile(
-                title: 'Back',
-                leading: Icon(Icons.arrow_back_ios),
-                onTap: () {
-                  Navigator.pop(context);
-                },
               ),
             ])
       ],
