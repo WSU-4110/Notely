@@ -25,11 +25,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final AuthService _auth = AuthService();
 
-  File _image; //Will be used to store and reference the image taken or chosen by the user.
+  File
+      _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
+    searchBar = SearchBar(
+        inBar: false,
+        setState: setState,
+        onSubmitted: print,
+        buildDefaultAppBar: buildAppBar);
   }
 
   //Function that builds the appbar and returns it.
@@ -37,7 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
     userInfo = Provider.of<User>(context);
     //This should contain the searchbar and hamburger button i think?
     return new AppBar(
-      title: new Text('Notely', style: TextStyle(fontFamily: 'MontserratAlternates', )),
+      title: new Text('Notely',
+          style: TextStyle(
+            fontFamily: 'MontserratAlternates',
+          )),
       actions: [searchBar.getSearchAction(context)],
     );
   }
@@ -51,29 +59,39 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
-      body: ListView.separated  //Creates a separated list of tiles to appear on the main page
-      (
-        itemBuilder: (BuildContext context, int index)  //Creates items to appear in the list
-        {
-          return ListTile   //This widget will probably be changed to something else, or at least given a clicking ability
+      body: ListView
+          .separated //Creates a separated list of tiles to appear on the main page
           (
-            title: Text('item $index')  //Displays the number on the tile
-          );
-        }, 
-        separatorBuilder: (BuildContext context, int index) => Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
+        itemBuilder: (BuildContext context,
+                int index) //Creates items to appear in the list
+            {
+          return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
+              (title: Text('item $index') //Displays the number on the tile
+                  );
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
         itemCount: 40, //This will change to an infinite scroll later
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'Make post',
-        child: Icon(Icons.add_a_photo, color: Colors.white,),
+        child: Icon(
+          Icons.add_a_photo,
+          color: Colors.white,
+        ),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Menu', style: TextStyle( color: Colors.white,),),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               decoration: BoxDecoration(
                 color: Colors.tealAccent.shade400,
               ),
@@ -98,13 +116,15 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.eco_outlined),
             ),
             ListTile(
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()));
-              }, // Function call for settings page.
-              leading: Icon(Icons.settings),
-            ),
+                //Got the settings page to load in.
+                title: Text('Settings'),
+                leading: Icon(Icons.settings),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                  );
+                }),
             ListTile(
               title: Text('Sign out'),
               leading: Icon(Icons.person),
@@ -121,7 +141,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
@@ -133,7 +154,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
