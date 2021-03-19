@@ -1,5 +1,6 @@
 import 'package:Notely/models/user.dart';
 import 'package:Notely/services/auth.dart';
+import 'package:Notely/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,11 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final AuthService _auth = AuthService();
 
-  File _image; //Will be used to store and reference the image taken or chosen by the user.
+  File
+      _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
-    searchBar = SearchBar(inBar: false, setState: setState, onSubmitted: print, buildDefaultAppBar: buildAppBar);
+    searchBar = SearchBar(
+        inBar: false,
+        setState: setState,
+        onSubmitted: print,
+        buildDefaultAppBar: buildAppBar);
   }
 
   //Function that builds the appbar and returns it.
@@ -90,9 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.eco_outlined),
             ),
             ListTile(
-              title: Text('Settings'),
-              leading: Icon(Icons.settings),
-            ),
+                title: Text('Settings'),
+                leading: Icon(Icons.settings),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                  );
+                }),
             ListTile(
               title: Text('Sign out'),
               leading: Icon(Icons.person),
@@ -109,7 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
 
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
@@ -121,7 +133,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
