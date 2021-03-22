@@ -49,14 +49,14 @@ class SettingsPage extends StatelessWidget {
               SettingsTile(
                 title: 'Change Email',
                 leading: Icon(Icons.email_outlined),
-                onTap: () {
+                onPressed: (BuildContext context) {
                   //Code to change email will go here.
                 },
               ),
               SettingsTile(
                 title: 'Change Major',
                 leading: Icon(Icons.history_edu_outlined),
-                onTap: () {
+                onPressed: (BuildContext context) {
                   //Code to change major wll go here.
                 },
               )
@@ -73,7 +73,7 @@ class SettingsPage extends StatelessWidget {
                   title: 'Change Alert',
                   leading: Icon(Icons.notifications),
                   //tried to code this to pull out a drop down, doesn't work
-                  onTap: () {
+                  onPressed: (BuildContext context) {
                     Container(
                       height: icons.length * buttonSize.height,
                       decoration: BoxDecoration(
