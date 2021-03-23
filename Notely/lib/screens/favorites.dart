@@ -26,7 +26,7 @@ class MyFavoritesPage extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, int index) =>
             Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
-        itemCount: 40, //This will change to an infinite scroll later
+        itemCount: 10, //This will change to an infinite scroll later
       ),
 
       // The following code is a button which will return the user back to the main page.
