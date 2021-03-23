@@ -12,7 +12,7 @@ class MyProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings Page'),
+        title: Text('Profile'),
         elevation: 1,
         leading: IconButton(
           icon: Icon(
