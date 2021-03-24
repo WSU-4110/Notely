@@ -25,7 +25,7 @@ class MyProfilePage extends StatelessWidget {
     getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings Page'),
+        title: Text('Profile Page'),
         elevation: 1,
         leading: IconButton(
           icon: Icon(

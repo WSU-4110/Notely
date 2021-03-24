@@ -14,7 +14,7 @@ openCreatePost(context, File image) {
 }
 
 uploadPhoto(){
-  DatabaseService().uploadImageToStorage(imageToUpload);
+  dynamic downloadUrl = DatabaseService().uploadImageToStorage(imageToUpload);
 }
 
 getUserInfo(User user) {
@@ -23,16 +23,26 @@ getUserInfo(User user) {
   });
 }
 
+createPost(BuildContext context, String postTitle, String uid) async {
+  await DatabaseService(uid: userInfo.uid).createPost(postTitle, imageToUpload, uid);
+  Navigator.pop(context);
+}
+
 class CreatePost extends StatefulWidget {
   @override
   _CreatePostState createState() => _CreatePostState();
 }
 
 class _CreatePostState extends State<CreatePost> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  String postTitle = '';
+  String error = '';
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
         title: Text('Create a new Post'),
@@ -47,63 +57,81 @@ class _CreatePostState extends State<CreatePost> {
           },
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(padding: EdgeInsets.all(5.0)),
-          Row(
-            children: <Widget>[
-              Padding(padding: EdgeInsets.only(left: 10.0),),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(width: 2.0, color: Colors.black),
-                    left: BorderSide(width: 2.0, color: Colors.black),
-                    right: BorderSide(width: 2.0, color: Colors.black),
-                    bottom: BorderSide(width: 2.0, color: Colors.black),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(5.0)),
+            Row(
+              children: <Widget>[
+                Padding(padding: EdgeInsets.only(left: 10.0),),
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      top: BorderSide(width: 2.0, color: Colors.tealAccent),
+                      left: BorderSide(width: 2.0, color: Colors.tealAccent),
+                      right: BorderSide(width: 2.0, color: Colors.tealAccent),
+                      bottom: BorderSide(width: 2.0, color: Colors.tealAccent),
+                    ),
+                  ),
+                  child: Image.file(imageToUpload, width: 100, height: 100,),
+                ),
+                Padding(padding: EdgeInsets.only(left: 10.0),),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      TextFormField(
+                          decoration: const InputDecoration(
+                          hintText: 'Title name',
+                          labelText: 'Enter Post Title',
+                        ),
+                        validator: (val) => val.isEmpty ? 'Title' : null,
+                        onChanged: (val) {
+                          setState(() => {postTitle = val});
+                        },
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 5.0),),
+                      Text(
+                        //('Username: ' + userInfo.username), //This will fill in automagically
+                        'Username: Julian Gombos',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Image.file(imageToUpload, width: 100, height: 100,),
+                Padding(padding: EdgeInsets.only(right: 10.0),),
+              ],
               ),
-              Padding(padding: EdgeInsets.only(left: 10.0),),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    TextFormField(
-                        decoration: const InputDecoration(
-                        hintText: 'Title name',
-                        labelText: 'Title',
-                      ),
-                      validator: (val) => val.isEmpty ? 'Title' : null,
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 5.0),),
-                    Text(
-                      ('Username: ' + userInfo.username), //This will fill in automagically
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
+            const Divider(
+              height: 40,
+              thickness: 2,
+              indent: 10,
+              endIndent: 10,
+              color: Colors.tealAccent,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent.shade400)),
+                  onPressed: () {
+                    createPost(context, postTitle, user.uid);
+                  }, 
+                  child: Text('Create Post'),
+                  ),
+              ],
               ),
-              Padding(padding: EdgeInsets.only(right: 10.0),),
-            ],
+            Text(
+              error,
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
             ),
-          const Divider(
-            height: 40,
-            thickness: 2,
-            indent: 10,
-            endIndent: 10,
-            color: Colors.black,
-          ),
-          Row(
-            children: <Widget>[
-
-            ],
-            ),
-        ],
-      ) 
+          ],
+        ),
+      ), 
     );
   }
 }

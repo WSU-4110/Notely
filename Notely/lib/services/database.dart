@@ -25,15 +25,28 @@ class DatabaseService {
     return await userInfoCollection.document(uid).get();
   }
 
-  uploadImageToStorage(File image) async {
+  Future createPost(String postTitle, File image, String userId) async {
+    dynamic url;
+    var downloadUrl = uploadImageToStorage(image);
+    await downloadUrl.then((value) {
+      url = value;
+    });
+    return await postCollection.document(userId).collection('UserPosts').add({
+      'postTitle': postTitle,
+      'imageUrl': url.toString(),
+    });
+  }
+
+  Future uploadImageToStorage(File image) async {
     var file = File(image.path);
     
     if (image != null){
         //Upload to Firebase
         var snapshot = await _firebaseStorage.ref()
-        .child('images/imageName')
+        .child('postImages/' + image.path)
         .putFile(file).onComplete;
-        var downloadUrl = await snapshot.ref.getDownloadURL(); //This url needs to be saved in database or something
+        var downloadUrl = await snapshot.ref.getDownloadURL(); //This url needs to be given to the createPost page so it can be saved asa field in a post
+        return downloadUrl.toString();
       } else {
         print('No Image Path Received');
       }
