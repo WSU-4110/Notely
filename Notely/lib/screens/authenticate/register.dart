@@ -74,7 +74,7 @@ class _RegisterState extends State<Register> {
                       hintText: 'Enter a username',
                       labelText: 'Username',
                     ),
-                    validator: (val) => val.length < 6 ? 'Enter a username over 4 characters long' : null,
+                    validator: (val) => val.length < 4 ? 'Enter a username over 4 characters long' : null,
                     onChanged: (val) {
                       setState(() => username = val);
                     },

@@ -12,8 +12,8 @@ openProfile(context) {
       context, MaterialPageRoute(builder: (context) => MyProfilePage()));
 }
 
-getUserInfo(User user) {
-  DatabaseService(uid: user.uid).getUserData().then((value){
+getUserInfo(User user) async {
+  await DatabaseService(uid: user.uid).getUserData().then((value){
     userInfo = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
   });
 }

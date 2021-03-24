@@ -24,7 +24,7 @@ getUserInfo(User user) {
 }
 
 createPost(BuildContext context, String postTitle, String uid) async {
-  await DatabaseService(uid: userInfo.uid).createPost(postTitle, imageToUpload, uid);
+  await DatabaseService().createPost(postTitle, imageToUpload, uid);
   Navigator.pop(context);
 }
 
