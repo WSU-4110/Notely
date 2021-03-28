@@ -3,6 +3,7 @@ import 'package:Notely/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:Notely/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:Notely/models/Post/Post.dart';
 
 File imageToUpload;
 User userInfo;
@@ -11,10 +12,6 @@ openCreatePost(context, File image) {
   imageToUpload = image;
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => CreatePost())); // Navigator to switch the user to Favorites Page screen
-}
-
-uploadPhoto(){
-  dynamic downloadUrl = DatabaseService().uploadImageToStorage(imageToUpload);
 }
 
 getUserInfo(User user) {
