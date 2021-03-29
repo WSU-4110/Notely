@@ -3,8 +3,8 @@ import 'dart:io';
 
 class MultiplePicPost extends Post{
 
-  List<String> picUrls;
-  List<File> pics;
+  List<String> _picUrls;
+  List<File> _pics;
 
   MultiplePicPost(String title, String date, List<String> tags, String username) : super(title: title, date: date, tags: tags, username: username);
 
@@ -14,22 +14,22 @@ class MultiplePicPost extends Post{
   }
 
   List<String> getPicUrls(){
-    return this.picUrls;
+    return this._picUrls;
   }
 
   List<File> getPics(){
-    return this.pics;
+    return this._pics;
   }
 
   void addImageToList(File image){
-    pics.add(image);
+    _pics.add(image);
   }
 
   void setPictureInList(int index, File image){
-    pics.insert(index, image);
+    _pics.insert(index, image);
   }
 
   int getNumberOfPics(){
-    return pics.length;
+    return _pics.length;
   }
 }
