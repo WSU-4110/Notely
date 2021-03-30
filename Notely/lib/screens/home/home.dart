@@ -122,7 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SettingsPage(Settings as Settings)),
                   );
                 }),
             ListTile(
