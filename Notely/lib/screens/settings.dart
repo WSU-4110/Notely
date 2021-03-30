@@ -1,3 +1,4 @@
+import 'package:Notely/screens/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart'; //Flutter Settings Package
 //Added under 'dependencies' in pubspec.yaml
@@ -12,7 +13,7 @@ Size buttonSize;
 Offset buttonPosition;
 bool isMenuOpen = false;
 
-class SettingsPage extends StatelessWidget {
+class Settings extends StatelessWidget implements Screen {
   @override
   Widget build(BuildContext context) {
     bool privateAccountValue = false;

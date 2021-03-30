@@ -1,13 +1,12 @@
+import 'package:Notely/screens/screen.dart';
 import 'package:flutter/material.dart';
-
-class Profile {}
 
 openProfile(context) {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => MyProfilePage()));
+      context, MaterialPageRoute(builder: (context) => Profile()));
 }
 
-class MyProfilePage extends StatelessWidget {
+class Profile extends StatelessWidget implements Screen {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,13 +1,12 @@
+import 'package:Notely/screens/screen.dart';
 import 'package:flutter/material.dart';
-
-class Favorites {}
 
 openFavorites(context) {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => MyFavoritesPage())); // Navigator to switch the user to Favorites Page screen
+      context, MaterialPageRoute(builder: (context) => Favorites())); // Navigator to switch the user to Favorites Page screen
 }
 
-class MyFavoritesPage extends StatelessWidget {
+class Favorites extends StatelessWidget implements Screen {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
