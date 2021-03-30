@@ -25,9 +25,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   dynamic userInfo;
-  
   SearchBar searchBar; //Search bar object
-
+  Postmaster primaryPostmaster = new Postmaster();
   final AuthService _auth = AuthService();
 
   File
@@ -73,15 +72,15 @@ class _MyHomePageState extends State<MyHomePage> {
               {
                 return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
                 (
-                  //leading: Image.network(primaryPostmaster.postList[index].imagelink),
-                  //title: Text(primaryPostmaster.postList[index].title),
-                  leading: Image.network("https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Other%20Explore%20Photos/R-Z/Wacky%20Weekend/Funny%20Animal%20Faces/ww-funny-animal-faces-hippopotamus.adapt.945.1.jpg"),
-                  title: Text("test $index"),
+                  leading: Image.network(primaryPostmaster.postList[index].imagelink),
+                  title: Text(primaryPostmaster.postList[index].title),
+                  // leading: Image.network("https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Other%20Explore%20Photos/R-Z/Wacky%20Weekend/Funny%20Animal%20Faces/ww-funny-animal-faces-hippopotamus.adapt.945.1.jpg"),
+                  // title: Text("test $index"),
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
               Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
-        itemCount: 10,//primaryPostmaster.postList.length, //This will change to an infinite scroll later
+        itemCount: primaryPostmaster.postList.length, //This will change to an infinite scroll later
       ),
 
 

@@ -1,46 +1,35 @@
 import 'package:Notely/models/DemoPosts.dart';
-
-//import 'package:Notely/models/Post.dart';
-//import 'package:Notely/assets/demodata.txt';
-
-import 'dart:io';
-//import 'package:path_provider/path_provider.dart';
+import 'dart:core';
 
 class Postmaster{
-  List<DemoPost> postList;  //this should maybe be static
-  File fileName; //This would be replaced with firebase url
+  List<DemoPost> postList = []; 
+  //File fileName; //This would be replaced with firebase url
   
-
-
   Postmaster(){
-    print("HEY I EXIST!!!");
-    fileName = new File('demodata.txt'); //Sorry for hardcoding this, but i gotta test it.
+    //postList = new List;
+    print("Postmaster has been created");
+    //fileName = new File('demodata.txt'); 
     loadPosts();
+    print("Post text in 1st slot = " + postList[0].title);
   }
 
   void loadPosts(){
 
-    fileName.readAsLines().then((value) => 
-      (){
-          for (int i = 0; i < value.length; i += 2)
-          {
-            print(value[i]);
-            postList[i] = new DemoPost(value[i], value[i+1]);
+    //I had to hardcode these because file reading was giving me issues, and I need them for testing purposes
+    postList.add(new DemoPost("CSC 3200 Notes", "https://3.bp.blogspot.com/-BDAGgWkK1-Y/VcPBhjZeR6I/AAAAAAAABiY/svh4aNkHPAo/s1600/IMG_8819_picmonkeyed.jpg"));
+    postList.add(new DemoPost("ART 4100 Lecture", "https://kaylablogs.com/wp-content/uploads/2016/09/aphasia-notes.jpg"));
+    postList.add(new DemoPost("MTH 2150 Complex Numbers", "https://wallpapercave.com/wp/wp6810211.jpg"));
 
-          }
-        }
-    );
+    //This function is not reading the file as intended
+    // fileName.readAsLines().then((value) => 
+    //   (){
+    //       for (int i = 0; i < value.length; i += 2)
+    //       {
+    //         print(value[i]);
+    //         postList[i] = new DemoPost(value[i], value[i+1]);
 
-
-
+    //       }
+    //     }
+    //);
   }
-  //return number of posts successfully loaded?
-
-  //void addPost()
-  //adds an individual post from the next line or something
-
-  //clearList()
-  //empties the whole list
-
-
 }
