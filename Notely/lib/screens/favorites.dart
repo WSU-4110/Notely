@@ -14,11 +14,9 @@ class MyFavoritesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Favorites'),
         ),
-        body: ListView
-          .separated //Creates a separated list of tiles to appear on the favorites page
+        body: ListView.separated //Creates a separated list of tiles to appear on the favorites page
           (
-        itemBuilder: (BuildContext context,
-                int index) //Creates items to appear in the list
+        itemBuilder: (BuildContext context, int index) //Creates items to appear in the list
             {
           return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
               (title: Text('item $index') //Displays the number on the tile
