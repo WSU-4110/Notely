@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:Notely/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:Notely/models/Post/Post.dart';
+import 'package:Notely/models/Post/OnePicPost.dart';
+import 'package:Notely/models/Post/MultiplePicPost.dart';
 
 File imageToUpload;
 User userInfo;
+List<File> images;
+List<String> imageUrls;
+List<String> tags;
 
 openCreatePost(context, File image) {
   imageToUpload = image;
@@ -21,8 +26,15 @@ getUserInfo(User user) {
 }
 
 createPost(BuildContext context, String postTitle, String uid) async {
-  await DatabaseService().createPost(postTitle, imageToUpload, uid);
-  Navigator.pop(context);
+  if(images.length == 0){
+    OnePicPost newPost = new OnePicPost(postTitle, "Date object", tags, "Username", imageToUpload);
+    await DatabaseService().createPost(postTitle, imageToUpload, uid);
+    Navigator.pop(context);
+  }else if(images.length > 0){
+    MultiplePicPost newPost = new MultiplePicPost(postTitle, "Date object", tags, "username", imageUrls, images);
+    await DatabaseService().createPost(postTitle, imageToUpload, uid);
+    Navigator.pop(context);
+  }
 }
 
 class CreatePost extends StatefulWidget {

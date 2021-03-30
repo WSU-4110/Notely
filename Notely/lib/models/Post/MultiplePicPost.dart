@@ -6,7 +6,7 @@ class MultiplePicPost extends Post{
   List<String> _picUrls;
   List<File> _pics;
 
-  MultiplePicPost(String title, String date, List<String> tags, String username) : super(title: title, date: date, tags: tags, username: username);
+  MultiplePicPost(String title, String date, List<String> tags, String username, this._picUrls, this._pics) : super(title: title, date: date, tags: tags, username: username);
 
   @override
   Type getPostType(){
