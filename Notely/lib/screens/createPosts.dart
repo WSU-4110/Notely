@@ -7,20 +7,24 @@ import 'package:image_picker/image_picker.dart';
 import 'package:Notely/services/tagsManager.dart';
 
 File imageToUpload;
-User userInfo;
+User userInfo; //This really needs to be moved to inside the class so it can be used properly
 
+//Function is used by the home screen to naviagte to the create a post screen
 openCreatePost(context, File image) {
   imageToUpload = image;
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => CreatePost())); // Navigator to switch the user to Favorites Page screen
 }
 
+//Gets the user's information. This needs to be fixed
 getUserInfo(User user) {
   DatabaseService(uid: user.uid).getUserData().then((value){
     userInfo = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
   });
 }
 
+//Function is called when the "Create Post" button is clicked. All the data is given and the function calls the corresponding
+//function from DatabaseService based on if more pictures were added to the post
 createPost(BuildContext context, String postTitle, String uid, List<File> images, List<String> tags) async {
   if(images.length == 0){
     await DatabaseService().createPost(postTitle, imageToUpload, uid, tags);
@@ -41,6 +45,8 @@ class _CreatePostState extends State<CreatePost> {
   List<Widget> boxes = new List();
   List<File> images = new List();
   List<Widget> tagBoxes = new List();
+
+  //Manager to keep a list of tags that will be used when uploading to database
   TagsManager tags = new TagsManager();
 
   String postTitle = '';
@@ -49,6 +55,7 @@ class _CreatePostState extends State<CreatePost> {
   int itemCount;
   File _image;
 
+  //A picture has been added to the post. This function adds the picture to the boxes list so its displayed on screen.
   void addPicToBoxes(){
     setState(() {
       boxes.insert(0,Card(
@@ -65,6 +72,7 @@ class _CreatePostState extends State<CreatePost> {
     });
   }
 
+  //Adds the inital box with the plus icon for adding more pics to the list so its not empty at first
   void addInitialBox(){
     setState(() {
       boxes.add(Card(
@@ -83,6 +91,7 @@ class _CreatePostState extends State<CreatePost> {
     });
   }
 
+  //Function deletes the last tag in the list. If there are no more tags in the list, the delete button is deleted as well
   void deleteTagBox(){
     setState(() {
       tags.removeTag(tagBoxes.length - 2);
@@ -93,9 +102,14 @@ class _CreatePostState extends State<CreatePost> {
     });
   }
 
+  //Adds a new tag to the list. If the tag is the first one added, the delete button is also added
   void addTagBox(){
     setState(() {
+
+      //Add tag to object which will be used in the database
       tags.addTag(tag);
+
+      //Checks to see if this is the first tag created
       if(tagBoxes.length == 0){
         tagBoxes.add(
           Card(
@@ -153,6 +167,7 @@ class _CreatePostState extends State<CreatePost> {
     });
   }
 
+  //Flutter function used to assign the first box to the add picture section
   @override
   void initState() {
     super.initState();
@@ -185,14 +200,6 @@ class _CreatePostState extends State<CreatePost> {
               children: <Widget>[
                 Padding(padding: EdgeInsets.only(left: 10.0),),
                 Container(
-                  /*decoration: const BoxDecoration(
-                    border: Border(
-                      top: BorderSide(width: 2.0, color: Colors.tealAccent),
-                      left: BorderSide(width: 2.0, color: Colors.tealAccent),
-                      right: BorderSide(width: 2.0, color: Colors.tealAccent),
-                      bottom: BorderSide(width: 2.0, color: Colors.tealAccent),
-                    ),
-                  ),*/
                   child: Image.file(imageToUpload, width: 100, height: 100,),
                 ),
                 Padding(padding: EdgeInsets.only(left: 10.0),),
@@ -292,6 +299,7 @@ class _CreatePostState extends State<CreatePost> {
     );
   }
 
+  //Called if the user selects the option to take a picture with their camera
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
     File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -299,8 +307,12 @@ class _CreatePostState extends State<CreatePost> {
     setState(() {
       imageCache.clear();
       _image = image;
+
+      //Add the image to the list of images that will be used to upload to the database
       images.add(_image);
     });
+
+    //Add the taken picture to the list of boxes so its displayed on screen
     addPicToBoxes();
   }
 
@@ -312,11 +324,16 @@ class _CreatePostState extends State<CreatePost> {
     setState(() {
       imageCache.clear();
       _image = image;
+
+      //Add the image to the list of images that will be used to upload to the database
       images.add(_image);
     });
+
+    //Add the chosen picture to the list of boxes so its displayed on screen
     addPicToBoxes();
   }
 
+  //Modal pops up on the bottom of the screen providing options to take a picture or pick one from gallery
   void _showPicker(context) {
     showModalBottomSheet(
         context: context,
