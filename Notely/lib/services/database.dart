@@ -37,6 +37,27 @@ class DatabaseService {
     });
   }
 
+  Future createMultiplePicPost(String postTitle, File mainImage, String userId, List<File> images) async {
+    List<dynamic> urls = new List();
+    dynamic url;
+    var downloadUrl = uploadImageToStorage(mainImage);
+    await downloadUrl.then((value) {
+      url = value;
+    });
+    for(int i = 0; i < images.length; i++){
+      var imageUrl = uploadImageToStorage(images[i]);
+      await imageUrl.then((value) {
+        urls.add(value);
+    });
+    }
+    print('In here');
+    return await postCollection.document(userId).collection('UserPosts').add({
+      'postTitle': postTitle,
+      'mainImageUrl': url.toString(),
+      'imageUrls' : urls,
+    });
+  }
+
   Future uploadImageToStorage(File image) async {
     var file = File(image.path);
     
