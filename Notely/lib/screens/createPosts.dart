@@ -42,9 +42,9 @@ class _CreatePostState extends State<CreatePost> {
 
   final _formKey = GlobalKey<FormState>();
 
-  List<Widget> boxes = new List();
-  List<File> images = new List();
-  List<Widget> tagBoxes = new List();
+  List<Widget> boxes = [];
+  List<File> images = [];
+  List<Widget> tagBoxes = [];
 
   //Manager to keep a list of tags that will be used when uploading to database
   TagsManager tags = new TagsManager();
