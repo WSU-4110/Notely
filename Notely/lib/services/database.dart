@@ -25,7 +25,7 @@ class DatabaseService {
     return await userInfoCollection.document(uid).get();
   }
 
-  Future createPost(String postTitle, File image, String userId) async {
+  Future createPost(String postTitle, File image, String userId, List<String> tags) async {
     dynamic url;
     var downloadUrl = uploadImageToStorage(image);
     await downloadUrl.then((value) {
@@ -33,11 +33,12 @@ class DatabaseService {
     });
     return await postCollection.document(userId).collection('UserPosts').add({
       'postTitle': postTitle,
-      'imageUrl': url.toString(),
+      'mainImageUrl': url.toString(),
+      'tags': tags,
     });
   }
 
-  Future createMultiplePicPost(String postTitle, File mainImage, String userId, List<File> images) async {
+  Future createMultiplePicPost(String postTitle, File mainImage, String userId, List<File> images, List<String> tags) async {
     List<dynamic> urls = new List();
     dynamic url;
     var downloadUrl = uploadImageToStorage(mainImage);
@@ -54,6 +55,7 @@ class DatabaseService {
     return await postCollection.document(userId).collection('UserPosts').add({
       'postTitle': postTitle,
       'mainImageUrl': url.toString(),
+      'tags': tags,
       'imageUrls' : urls,
     });
   }

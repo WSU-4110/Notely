@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:Notely/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:Notely/services/tagsManager.dart';
 
 File imageToUpload;
 User userInfo;
@@ -20,11 +21,11 @@ getUserInfo(User user) {
   });
 }
 
-createPost(BuildContext context, String postTitle, String uid, List<File> images) async {
+createPost(BuildContext context, String postTitle, String uid, List<File> images, List<String> tags) async {
   if(images.length == 0){
-    await DatabaseService().createPost(postTitle, imageToUpload, uid);
+    await DatabaseService().createPost(postTitle, imageToUpload, uid, tags);
   }else{
-    await DatabaseService().createMultiplePicPost(postTitle, imageToUpload, uid, images);
+    await DatabaseService().createMultiplePicPost(postTitle, imageToUpload, uid, images, tags);
   }
 }
 
@@ -39,10 +40,12 @@ class _CreatePostState extends State<CreatePost> {
 
   List<Widget> boxes = new List();
   List<File> images = new List();
-  List<String> tags = new List();
+  List<Widget> tagBoxes = new List();
+  TagsManager tags = new TagsManager();
 
   String postTitle = '';
   String error = '';
+  String tag = '';
   int itemCount;
   File _image;
 
@@ -80,6 +83,76 @@ class _CreatePostState extends State<CreatePost> {
     });
   }
 
+  void deleteTagBox(){
+    setState(() {
+      tags.removeTag(tagBoxes.length - 2);
+      tagBoxes.removeAt(tagBoxes.length - 2);
+      if(tagBoxes.length == 1){
+        tagBoxes.removeAt(0);
+      }
+    });
+  }
+
+  void addTagBox(){
+    setState(() {
+      tags.addTag(tag);
+      if(tagBoxes.length == 0){
+        tagBoxes.add(
+          Card(
+            color: Colors.tealAccent.shade400,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(tag),
+                  ), 
+                ),
+              ],
+            ),
+          ),
+        );
+        tagBoxes.add(
+          Padding(
+            padding: EdgeInsets.only(top: 4),
+            child: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.tealAccent.shade400),
+              child: InkWell(
+                onTap: () {
+                  deleteTagBox();
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: Icon(
+                    Icons.delete,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      }else if(tagBoxes.length >= 2){
+        tagBoxes.insert(tagBoxes.length-1,
+          Card(
+            color: Colors.tealAccent.shade400,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(tag),
+                  ), 
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -112,14 +185,14 @@ class _CreatePostState extends State<CreatePost> {
               children: <Widget>[
                 Padding(padding: EdgeInsets.only(left: 10.0),),
                 Container(
-                  decoration: const BoxDecoration(
+                  /*decoration: const BoxDecoration(
                     border: Border(
                       top: BorderSide(width: 2.0, color: Colors.tealAccent),
                       left: BorderSide(width: 2.0, color: Colors.tealAccent),
                       right: BorderSide(width: 2.0, color: Colors.tealAccent),
                       bottom: BorderSide(width: 2.0, color: Colors.tealAccent),
                     ),
-                  ),
+                  ),*/
                   child: Image.file(imageToUpload, width: 100, height: 100,),
                 ),
                 Padding(padding: EdgeInsets.only(left: 10.0),),
@@ -138,13 +211,34 @@ class _CreatePostState extends State<CreatePost> {
                           setState(() => {postTitle = val});
                         },
                       ),
-                      Padding(padding: EdgeInsets.only(top: 5.0),),
-                      Text(
-                        //('Username: ' + userInfo.username), //This will fill in automagically
-                        'Username: Julian Gombos',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            width: 200,
+                            child: TextFormField(
+                                decoration: const InputDecoration(
+                                hintText: 'Add tag',
+                                labelText: 'Add a tag',
+                              ),
+                              validator: (val) => val.isEmpty ? 'Tag' : null,
+                              onChanged: (val) {
+                                setState(() => {tag = val});
+                              },
+                            ),
+                          ),
+                          Padding(padding: EdgeInsets.only(left: 20),),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.tealAccent.shade400),
+                            child: IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                addTagBox();
+                              },
+                            )
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -152,6 +246,13 @@ class _CreatePostState extends State<CreatePost> {
                 Padding(padding: EdgeInsets.only(right: 10.0),),
               ],
               ),
+            Padding(padding: EdgeInsets.only(top: 10),),
+            Wrap(
+              direction: Axis.horizontal,
+              spacing: 10,
+              runSpacing: 10,
+              children: tagBoxes,
+            ),
             const Divider(
               height: 40,
               thickness: 2,
@@ -174,8 +275,9 @@ class _CreatePostState extends State<CreatePost> {
             ),
             ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent.shade400)),
-                onPressed: () {
-                  createPost(context, postTitle, user.uid, images);
+                onPressed: () async {
+                  //INSERT LOADING WIDGET HERE *********************************************************************************
+                  await createPost(context, postTitle, user.uid, images, tags.getTags());
                   Navigator.pop(context);
                 }, 
                 child: Text('Create Post'),
