@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('Profile'),
               leading: Icon(Icons.account_circle),
               onTap: () {
-                openProfile(context);
+                openProfile(context, userInfo);
               },
             ),
             ListTile(

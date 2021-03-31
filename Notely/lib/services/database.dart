@@ -51,7 +51,6 @@ class DatabaseService {
         urls.add(value);
     });
     }
-    print('In here');
     return await postCollection.document(userId).collection('UserPosts').add({
       'postTitle': postTitle,
       'mainImageUrl': url.toString(),
@@ -74,4 +73,7 @@ class DatabaseService {
         print('No Image Path Received');
       }
   }
+
+  
+
 }

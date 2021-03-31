@@ -5,20 +5,35 @@ import 'package:provider/provider.dart';
 
 class Profile {}
 
-User userInfo;
-
-openProfile(context) {
+openProfile(context, User user) {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => MyProfilePage()));
+      context, MaterialPageRoute(builder: (context) => ProfilePage()));
 }
 
-getUserInfo(User user) async {
-  await DatabaseService(uid: user.uid).getUserData().then((value){
-    userInfo = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
-  });
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class MyProfilePage extends StatelessWidget {
+class _ProfilePageState extends State<ProfilePage> {
+
+  User userInfo = new User(numberOfPosts: 0, username: '');
+
+  void getUserInfo(User user) async {
+    User info;
+    await DatabaseService(uid: user.uid).getUserData().then((value){
+      info = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
+      setState(() {
+        userInfo = info;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -69,8 +84,8 @@ class MyProfilePage extends StatelessWidget {
                         userInfo.username, //Username
                         style: TextStyle(
                           fontSize: 22.0,
-                          color: Colors.white,
-                        ),
+                          color: Colors.white
+                        )
                       ),
                       SizedBox(
                         height: 10.0,
@@ -106,7 +121,7 @@ class MyProfilePage extends StatelessWidget {
                                         fontSize: 20.0,
                                         color: Colors.tealAccent.shade400,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
