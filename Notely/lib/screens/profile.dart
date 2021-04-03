@@ -40,101 +40,123 @@ class _ProfilePageState extends State<ProfilePage> {
     getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page'),
+        title: Text('Profie Page'),
         elevation: 1,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
-          onPressed: () {
+          onPressed: (){
             Navigator.pop(context);
           },
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Colors.tealAccent.shade700,
-                    Colors.tealAccent.shade700
-                  ])),
-              child: Container(
-                width: double.infinity,
-                height: 350.0,
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
-                        ),
-                        radius: 50.0,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(
-                        userInfo.username, //Username
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.white
-                        )
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Card(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5.0),
-                        clipBehavior: Clip.antiAlias,
-                        color: Colors.white,
-                        elevation: 5.0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 22.0),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column( //displays the user profile information as a whole
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget> [
+              Container(
+                height: 200,
+                width: 375,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.shade400, width: 2, style: BorderStyle.solid),
+                  ),
+                ),
+                child: Row( //displays the username, follow button, profile pic, and the num of posts, likes, and followers
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget> [
+                    Container( 
+                      height: 75,
+                      width: 375,
+                      child: Column( //displays username, follow button, and the num of posts, likes, and followers
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget> [
+                          Container( //displays the username
+                          height: 50,
+                          width: 300,
                           child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "Posts",
-                                      style: TextStyle(
-                                        color: Colors.tealAccent.shade400,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      userInfo.numberOfPosts.toString(), //Number of posts
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.tealAccent.shade400,
-                                      ),
-                                    ),
-                                  ],
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget> [
+                              Container(
+                                height: 50,
+                                width: 150,
+                                child: Center(
+                                  child: Text(userInfo.username, 
+                                  style: TextStyle(fontSize: 20,),
+                                  ),
+                                ),
+                              ),
+                              Container( //displays follow button
+                                height: 50,
+                                width: 150,
+                                child: Center(
+                                  child: Text("BUTTON HERE",
+                                  style: TextStyle(fontSize: 20,),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      )
-                    ],
-                  ),
+                          ),
+                          Container( //displays the number of posts, likes, and followers
+                            height: 25,
+                            width: 300,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget> [
+                                Container( //displays number of posts
+                                  height: 25,
+                                  width: 100,
+                                  child: Center(
+                                    child: Text("posts"),
+                                  ),
+                                ),
+                                Container( //displays number of likes
+                                  height: 25,
+                                  width: 100,
+                                  child: Center(
+                                    child: Text("likes"),
+                                  ),
+                                ),
+                                Container( //displays number of followers
+                                  height: 25,
+                                  width: 100,
+                                  child: Center(
+                                    child: Text("followers"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                  ],
                 ),
-              )),
-        ],
-      ),
-    );
+                    ),
+                    Container( //displays users profile image
+                      // height: 75,
+                      // width: 75,
+                      child: Center(
+                        child: CircleAvatar(
+                          backgroundColor: Colors.tealAccent.shade400,
+                          radius: 25.0,
+                          ),
+                        ),
+                    ),
+                  ],
+                ),
+                
+              ),
+            ],
+          ),
+         ),
+     );
   }
 }
