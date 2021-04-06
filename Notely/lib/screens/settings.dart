@@ -12,10 +12,23 @@ Size buttonSize;
 Offset buttonPosition;
 bool isMenuOpen = false;
 
-class SettingsPage extends StatelessWidget {
+openSettings(context) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              SettingsPage())); // Navigator to switch the user to Favorites Page screen
+}
+
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    bool privateAccountValue = false;
+    bool toggle = false;
     String dropdownValue = '';
 
     return Scaffold(
@@ -57,6 +70,7 @@ class SettingsPage extends StatelessWidget {
                 title: 'Change Major',
                 leading: Icon(Icons.history_edu_outlined),
                 onPressed: (BuildContext context) {
+                  print(toggle);
                   //Code to change major wll go here.
                 },
               )
@@ -115,18 +129,10 @@ class SettingsPage extends StatelessWidget {
                 SettingsTile.switchTile(
                   title: 'Private Account',
                   leading: Icon(Icons.lock),
-                  switchValue: privateAccountValue,
+                  switchValue: toggle,
                   onToggle: (bool toggle) {
-                    //privateAccountValue is changed on user toggle. Important for later.
-                    if (toggle) {
-                      privateAccountValue = true;
-                      leading:
-                      Icon(Icons.ac_unit);
-                    } else {
-                      leading:
-                      Icon(Icons.local_airport_sharp);
-                      privateAccountValue = false;
-                    }
+                    toggle = true;
+                    print('The value for toggle variable is: $toggle');
                   },
                 ),
               ])
@@ -157,6 +163,4 @@ class SettingsPage extends StatelessWidget {
       ],
     );
   }
-
-  void setState(Null Function() param0) {} // For future functionality
 }
