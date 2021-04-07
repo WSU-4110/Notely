@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:Notely/models/DemoPosts.dart';
+import 'package:Notely/models/Post.dart';
 
 
 
-openPostview(context, DemoPost _post) {
+openPostview(context, Post _post) {
   Navigator.push(
         context, MaterialPageRoute(builder: (context) => PostviewPage(_post)));
 
@@ -11,16 +11,15 @@ openPostview(context, DemoPost _post) {
 
 class PostviewPage extends StatelessWidget {
 
-  DemoPost post;
+  Post post;
 
-  PostviewPage(DemoPost _post) {
+  PostviewPage(Post _post) {
     post = _post;
   }
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      
       appBar: AppBar(
         title: Text(post.title),
         ),

@@ -1,8 +1,8 @@
-import 'package:Notely/models/DemoPosts.dart';
+import 'package:Notely/models/Post.dart';
 import 'dart:core';
 
 class Postmaster{
-  List<DemoPost> postList = []; 
+  List<Post> postList = []; 
   //File fileName; //This would be replaced with firebase url
   
   Postmaster(){
@@ -16,9 +16,9 @@ class Postmaster{
   void loadPosts(){
 
     //I had to hardcode these because file reading was giving me issues, and I need them for testing purposes
-    postList.add(new DemoPost("CSC 3200 Notes", "https://3.bp.blogspot.com/-BDAGgWkK1-Y/VcPBhjZeR6I/AAAAAAAABiY/svh4aNkHPAo/s1600/IMG_8819_picmonkeyed.jpg"));
-    postList.add(new DemoPost("ART 4100 Lecture", "https://kaylablogs.com/wp-content/uploads/2016/09/aphasia-notes.jpg"));
-    postList.add(new DemoPost("MTH 2150 Complex Numbers", "https://wallpapercave.com/wp/wp6810211.jpg"));
+    postList.add(new Post("CSC 3200 Notes", "https://3.bp.blogspot.com/-BDAGgWkK1-Y/VcPBhjZeR6I/AAAAAAAABiY/svh4aNkHPAo/s1600/IMG_8819_picmonkeyed.jpg"));
+    postList.add(new Post("ART 4100 Lecture", "https://kaylablogs.com/wp-content/uploads/2016/09/aphasia-notes.jpg"));
+    postList.add(new Post("MTH 2150 Complex Numbers", "https://wallpapercave.com/wp/wp6810211.jpg"));
 
     //This function is not reading the file as intended
     // fileName.readAsLines().then((value) => 
