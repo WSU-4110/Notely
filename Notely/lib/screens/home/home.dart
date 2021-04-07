@@ -1,3 +1,4 @@
+import 'package:Notely/models/Postmaster.dart';
 import 'package:Notely/models/user.dart';
 import 'package:Notely/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,19 @@ import 'package:Notely/screens/settings.dart';
 import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
 import 'package:Notely/screens/profile.dart';
+
 import 'package:Notely/screens/createPosts.dart';
+
+import 'package:Notely/screens/Postview.dart';
+
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title; //We should change this to hold our logo image file
+  
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -21,9 +29,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   dynamic userInfo;
-
   SearchBar searchBar; //Search bar object
-
+  Postmaster primaryPostmaster = new Postmaster();
   final AuthService _auth = AuthService();
 
   File
@@ -60,20 +67,35 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
-      body: ListView
-          .separated //Creates a separated list of tiles to appear on the main page
-          (
-        itemBuilder: (BuildContext context,
-                int index) //Creates items to appear in the list
-            {
-          return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
-              (title: Text('item $index') //Displays the number on the tile
-                  );
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
-        itemCount: 40, //This will change to an infinite scroll later
+      
+
+
+      body: ListView.separated //Creates a separated list of tiles to appear on the main page
+            (
+              itemBuilder: (BuildContext context, int index) //Creates items to appear in the list
+              {
+                return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
+                (
+                  leading: Image.network(primaryPostmaster.postList[index].imagelink),
+                  title: Text(primaryPostmaster.postList[index].title),
+                  // leading: Image.network("https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Other%20Explore%20Photos/R-Z/Wacky%20Weekend/Funny%20Animal%20Faces/ww-funny-animal-faces-hippopotamus.adapt.945.1.jpg"),
+                  // title: Text("test $index"),
+                  onTap: (){openPostview(context, primaryPostmaster.postList[index]);
+                  },
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+              Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
+        itemCount: primaryPostmaster.postList.length, //This will change to an infinite scroll later
       ),
+
+
+
+
+
+
+
+
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'Make post',
