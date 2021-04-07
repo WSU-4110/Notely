@@ -60,46 +60,51 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget> [
               Container(
-                height: 200,
-                width: 375,
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.grey.shade400, width: 2, style: BorderStyle.solid),
                   ),
                 ),
+                child: Column(
+                  children: <Widget> [
+                  Container(
                 child: Row( //displays the username, follow button, profile pic, and the num of posts, likes, and followers
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget> [
                     Container( 
-                      height: 75,
-                      width: 375,
                       child: Column( //displays username, follow button, and the num of posts, likes, and followers
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget> [
                           Container( //displays the username
-                          height: 50,
-                          width: 300,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget> [
                               Container(
                                 height: 50,
                                 width: 150,
-                                child: Center(
-                                  child: Text(userInfo.username, 
-                                  style: TextStyle(fontSize: 20,),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10, top: 10),
+                                  child: Text(
+                                  //userInfo.username,
+                                  "Leahm", 
+                                  style: TextStyle(fontSize: 22,),
                                   ),
                                 ),
-                              ),
+                                ),
                               Container( //displays follow button
                                 height: 50,
                                 width: 150,
-                                child: Center(
-                                  child: Text("BUTTON HERE",
-                                  style: TextStyle(fontSize: 20,),
+                                child: Container(
+                                  margin: EdgeInsets.all(5),
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      side: BorderSide(color: Colors.tealAccent.shade400),
+                                    ),
+                                  onPressed: () {},
+                                  padding: EdgeInsets.all(5.0),
+                                  color: Colors.white,
+                                  textColor: Colors.tealAccent.shade400,
+                                  child: Text(
+                                    "Follow",
+                                    style: TextStyle(fontSize: 15)),
                                   ),
                                 ),
                               ),
@@ -107,32 +112,31 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           ),
                           Container( //displays the number of posts, likes, and followers
-                            height: 25,
-                            width: 300,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget> [
                                 Container( //displays number of posts
                                   height: 25,
                                   width: 100,
-                                  child: Center(
-                                    child: Text("posts"),
+                                  child: Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                  "posts",
                                   ),
+                                ),
                                 ),
                                 Container( //displays number of likes
                                   height: 25,
                                   width: 100,
-                                  child: Center(
-                                    child: Text("likes"),
-                                  ),
+                                  child: Text(
+                                    "likes",
+                                    ),
                                 ),
                                 Container( //displays number of followers
                                   height: 25,
                                   width: 100,
-                                  child: Center(
-                                    child: Text("followers"),
-                                  ),
+                                  child: Text(
+                                    "followers",
+                                    ),
                                 ),
                               ],
                             ),
@@ -141,18 +145,32 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                     ),
                     Container( //displays users profile image
-                      // height: 75,
-                      // width: 75,
+                      height: 75,
+                      width: 75,
                       child: Center(
                         child: CircleAvatar(
-                          backgroundColor: Colors.tealAccent.shade400,
-                          radius: 25.0,
+                          backgroundImage: NetworkImage(
+                            "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
+                          ),
+                          radius: 25,
                           ),
                         ),
-                    ),
+                      ),
                   ],
                 ),
-                
+                  ),
+                  Container(
+                height: 30,
+                width: 375,
+                child: Text("Name * School", style: TextStyle(fontSize: 17,),),
+              ),
+              Container(
+                height: 50,
+                width: 375,
+                child: Text("Mechanical Engineer, Junior, likes to bike and does competitive jump-roping"),
+                ),
+                  ],
+                ),
               ),
             ],
           ),
