@@ -9,6 +9,9 @@ import 'package:Notely/screens/settings.dart';
 import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
 import 'package:Notely/screens/profile.dart';
+
+import 'package:Notely/screens/createPosts.dart';
+
 import 'package:Notely/screens/Postview.dart';
 
 
@@ -121,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('Profile'),
               leading: Icon(Icons.account_circle),
               onTap: () {
-                openProfile(context);
+                openProfile(context, userInfo);
               },
             ),
             ListTile(
@@ -161,26 +164,25 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
-
+    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
       _image = image;
     });
+    openCreatePost(context, image);
   }
 
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
       _image = image;
     });
+    openCreatePost(context, image);
   }
 
   //Function is used to display the module at the bottom of the screen when the plus button is selected.
