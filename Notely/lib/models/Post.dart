@@ -2,8 +2,12 @@
 class Post {
   //final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
   String title;
-  String imagelink;
-  String date; //Might make a class for date so we dont gotta parse
+  String imagelink; //This is only for testing purposes
+  String author;
+  String date; //Might make a class for date so we dont gotta parse, timestamp
+  
+  bool reported;  //Will eventually be used to filter in listview
+
   List tags;  
   List images;  //Might be a list of ids of images in the database and we stream em right to the phone?
 
@@ -14,18 +18,4 @@ class Post {
     title = _title;
     imagelink = _imagelink;
   }
-
-
 }
-
-
-//This is for a post view screen
-// import 'dart:html';
-// import 'package:flutter/material.dart';
-// class Post extends StatefulWidget{
-// }
-// class _post extends State<post> {
-//   @override
-//   Widget build(BuildContext context) {
-//   }
-// }
