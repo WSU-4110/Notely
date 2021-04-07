@@ -9,6 +9,7 @@ import 'package:Notely/screens/settings.dart';
 import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
 import 'package:Notely/screens/profile.dart';
+import 'package:Notely/screens/Postview.dart';
 
 
 
@@ -76,6 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: Text(primaryPostmaster.postList[index].title),
                   // leading: Image.network("https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Other%20Explore%20Photos/R-Z/Wacky%20Weekend/Funny%20Animal%20Faces/ww-funny-animal-faces-hippopotamus.adapt.945.1.jpg"),
                   // title: Text("test $index"),
+                  onTap: (){openPostview(context, primaryPostmaster.postList[index]);
+                  },
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
