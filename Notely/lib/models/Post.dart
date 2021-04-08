@@ -1,8 +1,8 @@
-
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//
 class Post {
   //final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
   String title;
-  String imagelink; //This is only for testing purposes
   String author;
   String date; //Might make a class for date so we dont gotta parse, timestamp
   
@@ -13,9 +13,21 @@ class Post {
 
   //Post({this.uid}); //I think we would use the flutter thing key:uniquekey or something. 
 
-  Post (String _title, String _imagelink){
+  Post (String _title, String _author, String _date, bool _reported, List _tags, List _images){
     //uid = this.uid;
     title = _title;
-    imagelink = _imagelink;
+    author = _author;
+    date = _date;
+    reported = _reported;
+    tags = _tags;
+    images = _images;
   }
+
+  // Post.fromMap(Map<String, dynamic> data) {
+  // }
+
+  String tagsToString(){
+    return tags.toString();
+  }
+
 }

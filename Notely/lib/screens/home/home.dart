@@ -76,10 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
               {
                 return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
                 (
-                  leading: Image.network(primaryPostmaster.postList[index].imagelink),
+                  leading: Image.network(primaryPostmaster.postList[index].images[0]),
                   title: Text(primaryPostmaster.postList[index].title),
-                  // leading: Image.network("https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Other%20Explore%20Photos/R-Z/Wacky%20Weekend/Funny%20Animal%20Faces/ww-funny-animal-faces-hippopotamus.adapt.945.1.jpg"),
-                  // title: Text("test $index"),
+                  subtitle: Text(primaryPostmaster.postList[index].tagsToString()),
                   onTap: (){openPostview(context, primaryPostmaster.postList[index]);
                   },
                 );

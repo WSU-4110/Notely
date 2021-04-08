@@ -21,6 +21,10 @@ class DatabaseService {
     });
   }
 
+  Future getPostData() async {
+    return await postCollection;
+  }
+
   Future getUserData() async {
     return await userInfoCollection.document(uid).get();
   }
