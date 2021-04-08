@@ -11,8 +11,8 @@ class PostviewPage extends StatefulWidget {
 
   Post post;
   PostviewPage(Post _post) {
-       post = _post;
-     }
+    post = _post;
+  }
 
   @override
   _PostviewPageState createState() => _PostviewPageState(post);

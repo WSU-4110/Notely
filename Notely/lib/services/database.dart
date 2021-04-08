@@ -22,7 +22,7 @@ class DatabaseService {
   }
 
   Future getPostData() async {
-    return await postCollection;
+    return await postCollection.document(uid).get();
   }
 
   Future getUserData() async {

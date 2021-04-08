@@ -2,39 +2,28 @@ import 'package:Notely/models/Post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:Notely/services/database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'dart:core';
 
-
-  // QuerySnapshot querySnapshot = await Firestore.instance.collection("collection").getDocuments();
-  // var list = querySnapshot.documents;
-
 class Postmaster{
-  //var postCollection;
-  List<Post> postList = []; 
-  //File fileName; //This would be replaced with firebase url
-  //DatabaseService database = new DatabaseService();
-  
-  //QuerySnapshot querySnapshot
-  
+  List<Post> postList = []; //Holds the post objects that are read by the ListView Widget
+
   Postmaster(){
-    //print("Postmaster has been created"); 
-    loadPosts();
-    //print("Post text in 1st slot = " + postList[0].title);
-    
-    //postCollection = DatabaseService().getPostData();
+    getPosts();
   }
 
-  void loadPosts(){
+  //Retrieves a snapshot of data currently on database and prepares the data into post objects
+  getPosts() async{
+    QuerySnapshot snapshot = await Firestore.instance.collection('TestPosts').getDocuments();
+    snapshot.documents.forEach((document) {
+      Post post = Post.fromMap(document.data);
+      postList.add(post);
+    });
+  }
 
-    //querySnapshot = await Firestore.instance.collection("collection").getDocuments();
-    //List templist = querySnapshot.documents;
-
-    // for (i = 0; i < templist; ++i){
-    //   postList.add(new Post(templist[0]))
-    // }
-    
-    //I had to hardcode these because file reading was giving me issues, and I need them for testing purposes
+  //Used for testing only. Loads hardcoded posts for postmaster to read.
+  void testloadPosts(){
     var templist1 = ["Cats", "Big Cats", "Meow"];
     var templist2 = ["Reynolds", "Troll Toll", "Nightcrawlers"];
     var templist3 = ["Math", "Nerd stuff", "Whatever"];
