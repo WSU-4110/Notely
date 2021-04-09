@@ -1,34 +1,46 @@
 import 'package:Notely/models/Post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:Notely/services/database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'dart:core';
 
+//This class is used to create and store post objects to be read from listview widgets.
 class Postmaster{
   List<Post> postList = []; //Holds the post objects that are read by the ListView Widget
+  String _collection = "TestPosts2";  //Name of directories we are reading from for easy access
+  String _subcollection = "TestSubCollection";
 
+  //Main Constructor. Populates postList on creation
   Postmaster(){
     getPosts();
   }
 
-  //Retrieves a snapshot of data currently on database and prepares the data into post objects
+  //Accesses documents in database and populates postList with post objects from subdocs
   getPosts() async{
-    QuerySnapshot snapshot = await Firestore.instance.collection('TestPosts').getDocuments();
-    snapshot.documents.forEach((document) {
-      Post post = Post.fromMap(document.data);
-      postList.add(post);
+    QuerySnapshot snapshot = await Firestore.instance.collection(_collection).getDocuments(); //Waits for response from server and gathers toplevel docs
+    snapshot.documents.forEach((doc) {
+      getSubDocs(doc.documentID); //Calls each individual document by its ID to access its subdocs
     });
   }
 
-  //Used for testing only. Loads hardcoded posts for postmaster to read.
-  void testloadPosts(){
-    var templist1 = ["Cats", "Big Cats", "Meow"];
-    var templist2 = ["Reynolds", "Troll Toll", "Nightcrawlers"];
-    var templist3 = ["Math", "Nerd stuff", "Whatever"];
-    postList.add(new Post("CSC 3200 Notes", "Bookworm97", "4/7/2021", false, templist1, ["https://3.bp.blogspot.com/-BDAGgWkK1-Y/VcPBhjZeR6I/AAAAAAAABiY/svh4aNkHPAo/s1600/IMG_8819_picmonkeyed.jpg"]));
-    postList.add(new Post("ART 4100 Lecture", "Nightman_xx", "3/23/2021", false, templist2, ["https://kaylablogs.com/wp-content/uploads/2016/09/aphasia-notes.jpg"]));
-    postList.add(new Post("MTH 2150 Complex Numbers", "pointDexter314", "3/9/2021", false, templist3, ["https://wallpapercave.com/wp/wp6810211.jpg"]));
+  //Accesses subdocuments and creates the post objects
+  //In a perfect world, this could be deleted
+  getSubDocs(docID) async {
+    var subdocs = Firestore.instance.collection(_collection).document(docID).collection(_subcollection).snapshots(); //Takes a snapshot of all subdocs in document
+    subdocs.forEach((subdocument) { 
+      subdocument.documents.forEach((element) { //for each subdocument, creates a post object from map
+        Post post = Post.fromMap(element.data);
+        postList.add(post); //Adds post object to postList
+      });
+    });
   }
+
+  //For Testing: Retrieves a snapshot of data currently on database and prepares the data into post objects
+  // getPosts() async{
+  //   QuerySnapshot snapshot = await Firestore.instance.collection('TestPosts').getDocuments();
+  //   snapshot.documents.forEach((document) {
+  //     Post post = Post.fromMap(document.data);
+  //     postList.add(post);
+  //   });
+  // }
 }

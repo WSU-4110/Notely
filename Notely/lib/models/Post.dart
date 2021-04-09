@@ -1,5 +1,4 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//
+//This class is used to store data retrieved from database into a convenient object to be read by ListTiles
 class Post {
   //final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
   String title;
