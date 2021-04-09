@@ -1,12 +1,16 @@
 import 'dart:io';
-
+import 'package:intl/intl.dart';
+import 'package:Notely/screens/createPosts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Notely/services/auth.dart';
 
 class DatabaseService {
 
   final String uid;
   DatabaseService({this.uid});
+  
 
   final _firebaseStorage = FirebaseStorage.instance;
 
@@ -29,25 +33,28 @@ class DatabaseService {
     return await userInfoCollection.document(uid).get();
   }
 
+
   Future createPost(String postTitle, File image, String userId, List<String> tags) async {
-    dynamic url;
+    List<dynamic> urls = [];
     var downloadUrl = uploadImageToStorage(image);
     await downloadUrl.then((value) {
-      url = value;
+      urls.add(value);
     });
     return await postCollection.document(userId).collection('UserPosts').add({
-      'postTitle': postTitle,
-      'mainImageUrl': url.toString(),
+      'title': postTitle,
+      'images': urls,
       'tags': tags,
+      'author': "Placeholder Username", //Julian, please make this work!
+      'date': DateTime.now().toString(),
+      'reported': false,
     });
   }
 
-  Future createMultiplePicPost(String postTitle, File mainImage, String userId, List<File> images, List<String> tags) async {
-    List<dynamic> urls = new List();
-    dynamic url;
-    var downloadUrl = uploadImageToStorage(mainImage);
+  Future createMultiplePicPost(String postTitle, File image, String userId, List<File> images, List<String> tags) async {
+    List<dynamic> urls = [];
+    var downloadUrl = uploadImageToStorage(image);
     await downloadUrl.then((value) {
-      url = value;
+      urls.add(value);
     });
     for(int i = 0; i < images.length; i++){
       var imageUrl = uploadImageToStorage(images[i]);
@@ -56,10 +63,12 @@ class DatabaseService {
     });
     }
     return await postCollection.document(userId).collection('UserPosts').add({
-      'postTitle': postTitle,
-      'mainImageUrl': url.toString(),
+      'title': postTitle,
+      'images': urls,
       'tags': tags,
-      'imageUrls' : urls,
+      'author': "Placeholder Username", //Julian, please make this work!
+      'date': DateTime.now().toString(),
+      'reported': false,
     });
   }
 

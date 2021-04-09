@@ -12,13 +12,17 @@ class Postmaster{
 
   //Main Constructor. Populates postList on creation
   Postmaster(){
+    print("Postmaster is alive!!!");
     getPosts();
+    print("Posts recieved!");
+    print("Number of post objects: " + postList.length.toString());
   }
 
   //Accesses documents in database and populates postList with post objects from subdocs
-  getPosts() async{
+  getPosts() async {
     QuerySnapshot snapshot = await Firestore.instance.collection(_collection).getDocuments(); //Waits for response from server and gathers toplevel docs
     snapshot.documents.forEach((doc) {
+      print("THIS IS THE CURRENT DOC IM LOOKING AT: " + doc.documentID);
       getSubDocs(doc.documentID); //Calls each individual document by its ID to access its subdocs
     });
   }
@@ -26,12 +30,10 @@ class Postmaster{
   //Accesses subdocuments and creates the post objects
   //In a perfect world, this could be deleted
   getSubDocs(docID) async {
-    var subdocs = Firestore.instance.collection(_collection).document(docID).collection(_subcollection).snapshots(); //Takes a snapshot of all subdocs in document
-    subdocs.forEach((subdocument) { 
-      subdocument.documents.forEach((element) { //for each subdocument, creates a post object from map
-        Post post = Post.fromMap(element.data);
-        postList.add(post); //Adds post object to postList
-      });
+    var subdocs = await Firestore.instance.collection(_collection).document(docID).collection(_subcollection).getDocuments(); //Takes a snapshot of all subdocs in document
+    subdocs.documents.forEach((subdocument) { 
+      Post post = Post.fromMap(subdocument.data);
+      postList.add(post);
     });
   }
 
