@@ -1,16 +1,8 @@
+import 'package:Notely/screens/settingsOptions/editprofile.dart';
+import 'package:Notely/screens/settingsOptions/notificationsMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart'; //Flutter Settings Package
 //Added under 'dependencies' in pubspec.yaml
-
-List<Icon> icons = [
-  Icon(Icons.person),
-  Icon(Icons.settings),
-  Icon(Icons.credit_card),
-];
-
-Size buttonSize;
-Offset buttonPosition;
-bool isMenuOpen = false;
 
 openSettings(context) {
   Navigator.push(
@@ -28,8 +20,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    bool toggle = false;
-    String dropdownValue = '';
+    bool privateAccount = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,26 +48,29 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: 'Language',
                 subtitle: 'English',
                 leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
+                onPressed: (context) {},
               ),
               SettingsTile(
-                title: 'Change Email',
-                leading: Icon(Icons.email_outlined),
-                onPressed: (BuildContext context) {
-                  //Code to change email will go here.
+                title: 'Edit Profile',
+                subtitle: 'Change email, name, major, etc.',
+                leading: Icon(Icons.edit),
+                onPressed: (context) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()));
                 },
               ),
-              SettingsTile(
-                title: 'Change Major',
-                leading: Icon(Icons.history_edu_outlined),
-                onPressed: (BuildContext context) {
-                  print(toggle);
-                  //Code to change major wll go here.
-                },
-              )
             ],
           ),
-
+          SettingsSection(
+            title: 'Privacy',
+            titlePadding: EdgeInsets.all(15),
+            tiles: [
+              SettingsTile(
+                  title: 'Private Account',
+                  leading: Icon(Icons.lock),
+                  onPressed: (context) {})
+            ],
+          ),
           //Another section
           SettingsSection(
             title: 'Notifications',
@@ -87,55 +81,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: 'Change Alert',
                   leading: Icon(Icons.notifications),
                   //tried to code this to pull out a drop down, doesn't work
-                  onPressed: (BuildContext context) {
-                    Container(
-                      height: icons.length * buttonSize.height,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF67C0B9),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Theme(
-                        data: ThemeData(
-                          iconTheme: IconThemeData(
-                            color: Colors.white,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: List.generate(
-                            icons.length,
-                            (index) {
-                              return GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: buttonSize.width,
-                                  height: buttonSize.height,
-                                  child: icons[index],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    );
+                  onPressed: (context) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationsPage()));
                   }),
             ],
           ),
-
-          SettingsSection(
-              title: 'Privacy',
-              titlePadding: EdgeInsets.all(15),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: 'Private Account',
-                  leading: Icon(Icons.lock),
-                  switchValue: toggle,
-                  onToggle: (bool toggle) {
-                    toggle = true;
-                    print('The value for toggle variable is: $toggle');
-                  },
-                ),
-              ])
         ],
       ),
       //Here: I'm trying to display the profile picture above the settings page. Still working...
