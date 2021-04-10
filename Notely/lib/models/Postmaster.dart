@@ -18,6 +18,27 @@ class Postmaster{
     print("Number of post objects: " + postList.length.toString());
   }
 
+
+// getPosts() async {
+//     QuerySnapshot snapshot = await Firestore.instance.collection(_collection).getDocuments(); //Waits for response from server and gathers toplevel docs
+//     snapshot.documents.forEach((doc) {
+//       print("THIS IS THE CURRENT DOC IM LOOKING AT: " + doc.documentID);
+//       getSubDocs(doc.documentID); //Calls each individual document by its ID to access its subdocs
+//     });
+//   }
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Accesses documents in database and populates postList with post objects from subdocs
   getPosts() async {
     QuerySnapshot snapshot = await Firestore.instance.collection(_collection).getDocuments(); //Waits for response from server and gathers toplevel docs
@@ -45,4 +66,10 @@ class Postmaster{
   //     postList.add(post);
   //   });
   // }
+
+  // Clears the postList
+  void clearPostList(){
+    postList.clear();
+  }
+
 }
