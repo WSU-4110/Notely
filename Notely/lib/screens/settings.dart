@@ -1,5 +1,6 @@
 import 'package:Notely/screens/settingsOptions/editprofile.dart';
 import 'package:Notely/screens/settingsOptions/notificationsMenu.dart';
+import 'package:Notely/screens/settingsOptions/privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart'; //Flutter Settings Package
 //Added under 'dependencies' in pubspec.yaml
@@ -20,8 +21,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    bool privateAccount = false;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings Page'),
@@ -68,7 +67,10 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsTile(
                   title: 'Private Account',
                   leading: Icon(Icons.lock),
-                  onPressed: (context) {})
+                  onPressed: (context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PrivacyPage()));
+                  })
             ],
           ),
           //Another section

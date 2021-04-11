@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Option {
   Icon icon;
@@ -12,39 +12,26 @@ class Option {
 final options = [
   Option(
     icon: Icon(Icons.notification_important, size: 40.0),
-    title: 'Every Post',
-    subtitle: 'Receive a phone/email notification every post. ',
+    title: 'Private Account',
+    subtitle:
+        'Anonymous user: Name cannot be searched for. Posts are anonymous.',
   ),
   Option(
     icon: Icon(Icons.notification_important_outlined, size: 40.0),
-    title: 'Every Other Post',
-    subtitle: 'Receive a phone/email notification every other post. ',
-  ),
-  Option(
-    icon: Icon(Icons.notification_important_rounded, size: 40.0),
-    title: 'Every 5 Posts',
-    subtitle: 'Receive a phone/email notification every five posts. ',
-  ),
-  Option(
-    icon: Icon(Icons.notification_important_sharp, size: 40.0),
-    title: 'Every 10 Posts',
-    subtitle: 'Receive a phone/email notification every 10 posts. ',
-  ),
-  Option(
-    icon: Icon(Icons.notification_important_sharp, size: 40.0),
-    title: 'Off',
+    title: 'Public Account',
     subtitle:
-        'Turn off your notifications so you will not get notified when there is a post.',
+        'People can search your name and see your posts. Your posts will have your username on them. ',
   ),
 ];
 
-class NotificationsPage extends StatefulWidget {
+class PrivacyPage extends StatefulWidget {
   @override
-  _NotificationsPageState createState() => _NotificationsPageState();
+  _PrivacyPageState createState() => _PrivacyPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class _PrivacyPageState extends State<PrivacyPage> {
   int optionIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
