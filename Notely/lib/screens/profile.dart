@@ -77,34 +77,42 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Row(
                             children: <Widget> [
                               Container(
-                                height: 50,
+                                height: 70,
                                 width: 150,
+                                alignment: Alignment.centerLeft,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 10, top: 10),
                                   child: Text(
-                                  //userInfo.username,
-                                  "Leahm", 
+                                  userInfo.username,
                                   style: TextStyle(fontSize: 22,),
                                   ),
                                 ),
                                 ),
                               Container( //displays follow button
-                                height: 50,
+                                height: 70,
                                 width: 150,
                                 child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      side: BorderSide(color: Colors.tealAccent.shade400),
+                                  alignment: Alignment.centerLeft,
+                                  //margin: EdgeInsets.only(top: 10.0, bottom: 20.0, right: 30.0),
+                                  child: RawMaterialButton(
+                                    fillColor: Colors.tealAccent.shade400,
+                                    splashColor: Colors.tealAccent.shade400,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 5.0, left: 10.0, right: 20.0, bottom: 5.0 ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: const[
+                                          SizedBox(
+                                            width: 15.0,
+                                          ),
+                                          Text(
+                                            "Follow",
+                                            style: TextStyle(color: Colors.white, fontSize: 20),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  onPressed: () {},
-                                  padding: EdgeInsets.all(5.0),
-                                  color: Colors.white,
-                                  textColor: Colors.tealAccent.shade400,
-                                  child: Text(
-                                    "Follow",
-                                    style: TextStyle(fontSize: 15)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                   ),
                                 ),
                               ),
@@ -119,24 +127,42 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 100,
                                   child: Padding(
                                   padding: EdgeInsets.only(left: 10),
-                                  child: Text(
-                                  "posts",
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "69",
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " posts"),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 ),
                                 Container( //displays number of likes
                                   height: 25,
                                   width: 100,
-                                  child: Text(
-                                    "likes",
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "420",
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " likes"),
+                                      ],
                                     ),
+                                  ),
                                 ),
                                 Container( //displays number of followers
                                   height: 25,
                                   width: 100,
-                                  child: Text(
-                                    "followers",
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "13",
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " followers"),
+                                      ],
                                     ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -145,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                     ),
                     Container( //displays users profile image
-                      height: 75,
+                      height: 95,
                       width: 75,
                       child: Center(
                         child: CircleAvatar(
@@ -162,7 +188,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                 height: 30,
                 width: 375,
-                child: Text("Name * School", style: TextStyle(fontSize: 17,),),
+                child: RichText(
+                  text: TextSpan(
+                    text: "Name ",
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                    children: [
+                      WidgetSpan(child: Container( 
+                        padding: EdgeInsets.only(bottom: 3,), 
+                        child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,),
+                        ),
+                      ),
+                      TextSpan(text: " School"),
+                    ],
+                  ),
+                ),
               ),
               Container(
                 height: 50,
