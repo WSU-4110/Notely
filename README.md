@@ -8,6 +8,13 @@ Notely is a mobile app for iOS and Android that allows students to take pictures
 Notely was built using Flutter 2.0.1 and Dart 2.12.0.
 Notetly utilizes Google Firebase for its backend API.
 
+Contributing Members
+- Christian Anthony
+- Julian Gombos
+- Leah Mackay
+- Sheev Patel
+- Jacob Good
+
 ## Installation
 
 Here are some resources that will be needed in order to run the app:
