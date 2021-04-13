@@ -41,7 +41,8 @@ Once the source code has been downloaded, open VS Code and navigate to "File -> 
 Navigate to "Terminal -> New Terminal" to open up a new terminal.
 
 Run the following commands:
-```cd Notely
+```
+cd Notely
 flutter pub get
 ```
 
