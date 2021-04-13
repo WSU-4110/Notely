@@ -30,6 +30,7 @@ Here are some resources that will be needed in order to run the app:
 - After Android Studio has been installed, the emulator needs to be setup.
 
 - Open up Android Studio and navigate to "Tools -> AVD Manager".
+![Image of Yaktocat](https://github.com/WSU-4110/Notely/blob/master/Notely/pictures/toolsAVD.png)
 
 - Once in AVD Manager, click on "Create Visual Device..." at the bottom left of the window.
 
