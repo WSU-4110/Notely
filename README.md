@@ -20,25 +20,25 @@ Here are some resources that will be needed in order to run the app:
 
 ### Setting up the emulator
 
--After Android Studio has been installed, the emulator needs to be setup.
+- After Android Studio has been installed, the emulator needs to be setup.
 
--Open up Android Studio and navigate to "Tools -> AVD Manager".
+- Open up Android Studio and navigate to "Tools -> AVD Manager".
 
--Once in AVD Manager, click on "Create Visual Device..." at the bottom left of the window.
+- Once in AVD Manager, click on "Create Visual Device..." at the bottom left of the window.
 
--In the Phone category, select "Pixel 2" and then click next.
+- In the Phone category, select "Pixel 2" and then click next.
 
--For the system image, select Release Name "R" which should have API Level 30.
+- For the system image, select Release Name "R" which should have API Level 30.
 
--For "AVD Name", name it whatever you like and click finish. The emulator is now setup.
+- For "AVD Name", name it whatever you like and click finish. The emulator is now setup.
 
 ### Importing the project in Visual Studio Code (VS Code)
 
--Download the Notely source either by cloning or by downloading the .zip
+- Download the Notely source either by cloning or by downloading the .zip
 
--Once the source code has been downloaded, open VS Code and navigate to "File -> Open Folder...". Select the top most folder for the source code and open it.
+- Once the source code has been downloaded, open VS Code and navigate to "File -> Open Folder...". Select the top most folder for the source code and open it.
 
--Navigate to "Terminal -> New Terminal" to open up a new terminal.
+- Navigate to "Terminal -> New Terminal" to open up a new terminal.
 
 Run the following commands:
 ```
@@ -46,23 +46,23 @@ cd Notely
 flutter pub get
 ```
 
--If the file structure can't be seen, at the very top left of VS Code, there is an icon that looks like two pages. When hovering over it will say "Explorer". Click on that to show the file structure.
+- If the file structure can't be seen, at the very top left of VS Code, there is an icon that looks like two pages. When hovering over it will say "Explorer". Click on that to show the file structure.
 
 ### Running Notely
 
--In the file structure navigate to "Notely/lib/main.dart" and double click main.dart.
+- In the file structure navigate to "Notely/lib/main.dart" and double click main.dart.
 
--At the very bottom right of VS Code it will say "No Device". Click on "No Device" and VS Code will prompt for a device.
+- At the very bottom right of VS Code it will say "No Device". Click on "No Device" and VS Code will prompt for a device.
 
--If you installed Android Studio properly, you should see an option to select "Start PIXEL 2 API 30" as a device.
+- If you installed Android Studio properly, you should see an option to select "Start PIXEL 2 API 30" as a device.
 
--Once you select the device, you will see VS Code launch the device and the emulated device will show up.
+- Once you select the device, you will see VS Code launch the device and the emulated device will show up.
 
--As long as main.dart is currently in focus, you will see a triangle play button at the top right of VS Code. Click the play button and select "Start Debugging".
+- As long as main.dart is currently in focus, you will see a triangle play button at the top right of VS Code. Click the play button and select "Start Debugging".
 
--You will see VS Code launch the app and will build it. This can take a couple minutes so be patient. If it was successful, you will see the app automatically open in the emulator.
+- You will see VS Code launch the app and will build it. This can take a couple minutes so be patient. If it was successful, you will see the app automatically open in the emulator.
 
--The app is now ready to use. 
+- The app is now ready to use. 
 
 
 For help getting started with Flutter, view our
