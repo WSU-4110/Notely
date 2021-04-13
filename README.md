@@ -18,7 +18,7 @@ Here are some resources that will be needed in order to run the app:
 - [Andriod Studio: For emulation](https://developer.android.com/studio)
 - [Visual Studio Code](https://code.visualstudio.com/)
 
-### Setting up the emulator
+## Setting up the emulator
 
 - After Android Studio has been installed, the emulator needs to be setup.
 
@@ -32,7 +32,7 @@ Here are some resources that will be needed in order to run the app:
 
 - For "AVD Name", name it whatever you like and click finish. The emulator is now setup.
 
-### Importing the project in Visual Studio Code (VS Code)
+## Importing the project in Visual Studio Code (VS Code)
 
 - Download the Notely source either by cloning or by downloading the .zip
 
@@ -48,7 +48,7 @@ flutter pub get
 
 - If the file structure can't be seen, at the very top left of VS Code, there is an icon that looks like two pages. When hovering over it will say "Explorer". Click on that to show the file structure.
 
-### Running Notely
+## Running Notely
 
 - In the file structure navigate to "Notely/lib/main.dart" and double click main.dart.
 
