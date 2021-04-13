@@ -46,7 +46,7 @@ cd Notely
 flutter pub get
 ```
 
-If the file structure can't be seen, at the very top left of VS Code, there is an icon of two pages. When hovering over it will say "Explorer". Click on that to show the file structure.
+If the file structure can't be seen, at the very top left of VS Code, there is an icon that looks like two pages. When hovering over it will say "Explorer". Click on that to show the file structure.
 
 ### Running Notely
 
