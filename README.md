@@ -35,6 +35,8 @@ Here are some resources that will be needed in order to run the app:
 
 - Once in AVD Manager, click on "Create Visual Device..." at the bottom left of the window.
 
+  ![Image}(https://github.com/WSU-4110/Notely/blob/master/Notely/pictures/createVirtualDevice.PNG)
+
 - In the Phone category, select "Pixel 2" and then click next.
 
 - For the system image, select Release Name "R" which should have API Level 30.
