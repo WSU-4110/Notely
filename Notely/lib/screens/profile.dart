@@ -40,101 +40,180 @@ class _ProfilePageState extends State<ProfilePage> {
     getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text('Profie Page'),
         elevation: 1,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
-          onPressed: () {
+          onPressed: (){
             Navigator.pop(context);
           },
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Colors.tealAccent.shade700,
-                    Colors.tealAccent.shade700
-                  ])),
-              child: Container(
-                width: double.infinity,
-                height: 350.0,
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
-                        ),
-                        radius: 50.0,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(
-                        userInfo.username, //Username
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.white
-                        )
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Card(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5.0),
-                        clipBehavior: Clip.antiAlias,
-                        color: Colors.white,
-                        elevation: 5.0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 22.0),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column( //displays the user profile information as a whole
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget> [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.shade400, width: 2, style: BorderStyle.solid),
+                  ),
+                ),
+                child: Column(
+                  children: <Widget> [
+                  Container(
+                child: Row( //displays the username, follow button, profile pic, and the num of posts, likes, and followers
+                  children: <Widget> [
+                    Container( 
+                      child: Column( //displays username, follow button, and the num of posts, likes, and followers
+                        children: <Widget> [
+                          Container( //displays the username
                           child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "Posts",
-                                      style: TextStyle(
-                                        color: Colors.tealAccent.shade400,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
+                            children: <Widget> [
+                              Container(
+                                height: 70,
+                                width: 150,
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10, top: 10),
+                                  child: Text(
+                                  userInfo.username,
+                                  style: TextStyle(fontSize: 22,),
+                                  ),
+                                ),
+                                ),
+                              Container( //displays follow button
+                                height: 70,
+                                width: 150,
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  //margin: EdgeInsets.only(top: 10.0, bottom: 20.0, right: 30.0),
+                                  child: RawMaterialButton(
+                                    fillColor: Colors.tealAccent.shade400,
+                                    splashColor: Colors.tealAccent.shade400,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 5.0, left: 10.0, right: 20.0, bottom: 5.0 ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: const[
+                                          SizedBox(
+                                            width: 15.0,
+                                          ),
+                                          Text(
+                                            "Follow",
+                                            style: TextStyle(color: Colors.white, fontSize: 20),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      userInfo.numberOfPosts.toString(), //Number of posts
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.tealAccent.shade400,
-                                      ),
-                                    ),
-                                  ],
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
+                          ),
+                          Container( //displays the number of posts, likes, and followers
+                            child: Row(
+                              children: <Widget> [
+                                Container( //displays number of posts
+                                  height: 25,
+                                  width: 100,
+                                  child: Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "69",
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " posts"),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                ),
+                                Container( //displays number of likes
+                                  height: 25,
+                                  width: 100,
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "420",
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " likes"),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container( //displays number of followers
+                                  height: 25,
+                                  width: 100,
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "13",
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " followers"),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                  ],
+                ),
+                    ),
+                    Container( //displays users profile image
+                      height: 95,
+                      width: 75,
+                      child: Center(
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
+                          ),
+                          radius: 25,
+                          ),
                         ),
-                      )
+                      ),
+                  ],
+                ),
+                  ),
+                  Container(
+                height: 30,
+                width: 375,
+                child: RichText(
+                  text: TextSpan(
+                    text: "Name ",
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                    children: [
+                      WidgetSpan(child: Container( 
+                        padding: EdgeInsets.only(bottom: 3,), 
+                        child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,),
+                        ),
+                      ),
+                      TextSpan(text: " School"),
                     ],
                   ),
                 ),
-              )),
-        ],
-      ),
-    );
+              ),
+              Container(
+                height: 50,
+                width: 375,
+                child: Text("Mechanical Engineer, Junior, likes to bike and does competitive jump-roping"),
+                ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+         ),
+     );
   }
 }
