@@ -1,15 +1,43 @@
+import 'package:Notely/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:Notely/services/database.dart';
+import 'package:provider/provider.dart';
 
 class Profile {}
 
-openProfile(context) {
+openProfile(context, User user) {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => MyProfilePage()));
+      context, MaterialPageRoute(builder: (context) => ProfilePage()));
 }
 
-class MyProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  User userInfo = new User(numberOfPosts: 0, username: '');
+
+  void getUserInfo(User user) async {
+    User info;
+    await DatabaseService(uid: user.uid).getUserData().then((value){
+      info = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
+      setState(() {
+        userInfo = info;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
@@ -53,11 +81,11 @@ class MyProfilePage extends StatelessWidget {
                         height: 10.0,
                       ),
                       Text(
-                        "Alice James",
+                        userInfo.username, //Username
                         style: TextStyle(
                           fontSize: 22.0,
-                          color: Colors.white,
-                        ),
+                          color: Colors.white
+                        )
                       ),
                       SizedBox(
                         height: 10.0,
@@ -88,12 +116,12 @@ class MyProfilePage extends StatelessWidget {
                                       height: 5.0,
                                     ),
                                     Text(
-                                      "27",
+                                      userInfo.numberOfPosts.toString(), //Number of posts
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.tealAccent.shade400,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),

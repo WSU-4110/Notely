@@ -1,4 +1,5 @@
 import 'package:Notely/models/user.dart';
+import 'package:Notely/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -27,10 +28,11 @@ class AuthService {
     }
   }
 
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(String email, String password, String username) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid).updateUserData(username);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -42,6 +44,7 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

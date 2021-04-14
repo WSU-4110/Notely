@@ -1,3 +1,4 @@
+import 'package:Notely/models/Postmaster.dart';
 import 'package:Notely/models/user.dart';
 import 'package:Notely/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,18 @@ import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
 import 'package:Notely/screens/profile.dart';
 
+import 'package:Notely/screens/createPosts.dart';
+
+import 'package:Notely/screens/Postview.dart';
+
+
+
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title; //We should change this to hold our logo image file
+  
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -20,9 +29,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   dynamic userInfo;
-
   SearchBar searchBar; //Search bar object
-
+  Postmaster primaryPostmaster = new Postmaster();
   final AuthService _auth = AuthService();
 
   File
@@ -59,20 +67,34 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
-      body: ListView
-          .separated //Creates a separated list of tiles to appear on the main page
-          (
-        itemBuilder: (BuildContext context,
-                int index) //Creates items to appear in the list
-            {
-          return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
-              (title: Text('item $index') //Displays the number on the tile
-                  );
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
-        itemCount: 40, //This will change to an infinite scroll later
+      
+
+
+      body: ListView.separated //Creates a separated list of tiles to appear on the main page
+            (
+              itemBuilder: (BuildContext context, int index) //Creates items to appear in the list
+              {
+                return ListTile //This widget will probably be changed to something else, or at least given a clicking ability
+                (
+                  leading: Image.network(primaryPostmaster.postList[index].images[0]),
+                  title: Text(primaryPostmaster.postList[index].title),
+                  subtitle: Text(primaryPostmaster.postList[index].tagsToString()),
+                  onTap: (){openPostview(context, primaryPostmaster.postList[index]);
+                  },
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+              Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
+        itemCount: primaryPostmaster.postList.length, //This will change to an infinite scroll later
       ),
+
+
+
+
+
+
+
+
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'Make post',
@@ -101,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('Profile'),
               leading: Icon(Icons.account_circle),
               onTap: () {
-                openProfile(context);
+                openProfile(context, userInfo);
               },
             ),
             ListTile(
@@ -141,26 +163,25 @@ class _MyHomePageState extends State<MyHomePage> {
   //Called if the user selects the option to take a picture
   _imgFromCamera() async {
     //Waits for the user to take a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
-
+    File image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
       _image = image;
     });
+    openCreatePost(context, image);
   }
 
   //Called if the user selects the option to pick an image from their gallery
   _imgFromGallery() async {
     //Waits for the user to select a picture and stores it in File object
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     //Updates the state with the new image. imageCache is called to prevent flutter from using cached images
     setState(() {
       imageCache.clear();
       _image = image;
     });
+    openCreatePost(context, image);
   }
 
   //Function is used to display the module at the bottom of the screen when the plus button is selected.
