@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
     getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page'),
+        title: Text('Profile'),
         elevation: 1,
         leading: IconButton(
           icon: Icon(
