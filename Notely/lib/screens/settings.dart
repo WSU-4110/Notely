@@ -20,7 +20,7 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings Page'),
+        title: Text('Settings'),
         elevation: 1,
         leading: IconButton(
           icon: Icon(
