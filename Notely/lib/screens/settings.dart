@@ -3,9 +3,11 @@ import 'package:Notely/screens/settingsOptions/notificationsMenu.dart';
 import 'package:Notely/screens/settingsOptions/privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart'; //Flutter Settings Package
-//Added under 'dependencies' in pubspec.yaml
 
+int testVal = 0;
+//Added under 'dependencies' in pubspec.yaml
 openSettings(context) {
+  testVal = 1;
   Navigator.push(
       context,
       MaterialPageRoute(
