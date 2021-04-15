@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void getUserInfo(User user) async {
     User info;
     await DatabaseService(uid: user.uid).getUserData().then((value){
-      info = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
+      info = new User(username: value.data["username"], numberOfPosts: value.data["numberOfPosts"], name: value.data["name"], school: value.data["school"]);
       setState(() {
         userInfo = info;
       });
@@ -190,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: 375,
                 child: RichText(
                   text: TextSpan(
-                    text: "Name ",
+                    text: userInfo.name,
                     style: TextStyle(color: Colors.black, fontSize: 17),
                     children: [
                       WidgetSpan(child: Container( 
@@ -198,7 +198,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,),
                         ),
                       ),
-                      TextSpan(text: " School"),
+                      TextSpan(text: userInfo.school),
                     ],
                   ),
                 ),

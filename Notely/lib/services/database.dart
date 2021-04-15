@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:Notely/screens/createPosts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,10 +19,12 @@ class DatabaseService {
   final CollectionReference userInfoCollection =
       Firestore.instance.collection('UserInfo');
 
-  Future updateUserData(String name) async {
+  Future updateUserData(String username, String name, String school) async {
     return await userInfoCollection.document(uid).setData({
-      'name': name,
+      'username': username,
       'numberOfPosts': 0,
+      'name': name,
+      'school': school,
     });
   }
 
