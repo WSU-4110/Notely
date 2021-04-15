@@ -1,3 +1,4 @@
+import 'package:Notely/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +9,10 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final tempKey = GlobalKey();
-  String email = '';
-  String password = '';
+  String email = newEmail;
+  String password = newPassword;
   String error = '';
-  String major = ' ';
+  String major = newMajor;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
