@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Notely/models/Post.dart';
 
@@ -32,6 +33,18 @@ class _PostviewPageState extends State<PostviewPage> {
       appBar: AppBar(
         title: Text(post.title),
         ),
+        body: Container(alignment: Alignment.topCenter,
+        child: Column(children: <Widget>[
+          Column(
+            children: <Widget>[
+              Text("Author: " + post.author),
+              Text("Date Published: " + post.date),
+              Image.network(post.images[0]),
+              Text("Tags: " + post.tagsToString())
+          ],
+        )]
+        )
+      )
     );
   }
 }
