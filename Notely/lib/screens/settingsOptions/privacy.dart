@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//Local class to store the tiles.
 class Option {
   Icon icon;
   String title;
@@ -9,6 +10,7 @@ class Option {
   Option({this.icon, this.title, this.subtitle});
 }
 
+//array of the two different tiles. Just the interface.
 final options = [
   Option(
     icon: Icon(Icons.notification_important, size: 40.0),
@@ -29,25 +31,30 @@ class PrivacyPage extends StatefulWidget {
   _PrivacyPageState createState() => _PrivacyPageState();
 }
 
+//stateful widget
 class _PrivacyPageState extends State<PrivacyPage> {
   int optionIndex = 0;
+  //bool for private account
   bool private = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //Top bar with the back button.
         appBar: AppBar(
           backgroundColor: Colors.tealAccent.shade700,
-          title: Text('Menu Options'),
+          title: Text('Privacy Settings'),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
+            //functionality to the back button.
             onPressed: () {
               Navigator.pop(context);
             },
           ),
         ),
+        //Build the list.
         body: ListView.builder(
           itemCount: options.length + 2,
           itemBuilder: (BuildContext context, int index) {
@@ -56,6 +63,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
             } else if (index == options.length + 1) {
               return SizedBox(height: 100.0);
             }
+            //container to store the tiles.
             return Container(
               alignment: Alignment.center,
               margin: EdgeInsets.all(10.0),
@@ -68,9 +76,12 @@ class _PrivacyPageState extends State<PrivacyPage> {
                     ? Border.all(color: Colors.black26)
                     : null,
               ),
+              //For tiles, index tracks where you are.
               child: ListTile(
+                //sets icon.
                 leading: options[index - 1].icon,
                 title: Text(
+                  //sets title.
                   options[index - 1].title,
                   style: TextStyle(
                     color: optionIndex == index - 1
@@ -79,6 +90,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   ),
                 ),
                 subtitle: Text(
+                  //sets subtitle.
                   options[index - 1].subtitle,
                   style: TextStyle(
                     color:
@@ -86,8 +98,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   ),
                 ),
                 selected: optionIndex == index - 1,
+                //based on the selection.
                 onTap: () {
                   setState(() {
+                    //Here, we set the bool based on user selection
                     optionIndex = index - 1;
                     if (optionIndex == 0) {
                       private = false;
@@ -100,10 +114,14 @@ class _PrivacyPageState extends State<PrivacyPage> {
             );
           },
         ),
+        //Bottom bar. Code to finalize will be in here.
         bottomSheet: GestureDetector(
           onTap: () {
+            //Code to save changes will go here:
+            //Could be something like user.privateAccount = private;
             Navigator.pop(context);
           },
+          //Decorating the save button.
           child: Container(
             width: double.infinity,
             height: 80.0,

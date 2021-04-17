@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+//class for all of the change notification objects.
 class Option {
   Icon icon;
   String title;
@@ -9,6 +10,7 @@ class Option {
   Option({this.icon, this.title, this.subtitle});
 }
 
+//Array to hold all of the change notification options
 final options = [
   Option(
     icon: Icon(Icons.notification_important, size: 40.0),
@@ -43,24 +45,28 @@ class NotificationsPage extends StatefulWidget {
   _NotificationsPageState createState() => _NotificationsPageState();
 }
 
+//Stateful widget
 class _NotificationsPageState extends State<NotificationsPage> {
   int optionIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //top menu bar.
         appBar: AppBar(
           backgroundColor: Colors.tealAccent.shade700,
-          title: Text('Menu Options'),
+          title: Text('Notification Options'),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
+            //back button on top menu bar.
             onPressed: () {
               Navigator.pop(context);
             },
           ),
         ),
+        //creates the list.
         body: ListView.builder(
           itemCount: options.length + 2,
           itemBuilder: (BuildContext context, int index) {
@@ -81,9 +87,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     ? Border.all(color: Colors.black26)
                     : null,
               ),
+              //For the individual tiles.
               child: ListTile(
                 leading: options[index - 1].icon,
                 title: Text(
+                  //getting title of the object using the class.
                   options[index - 1].title,
                   style: TextStyle(
                     color: optionIndex == index - 1
@@ -91,6 +99,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         : Colors.grey[600],
                   ),
                 ),
+                //settings the subtitle.
                 subtitle: Text(
                   options[index - 1].subtitle,
                   style: TextStyle(
@@ -98,6 +107,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         optionIndex == index - 1 ? Colors.black : Colors.grey,
                   ),
                 ),
+                //Sets the selected option
                 selected: optionIndex == index - 1,
                 onTap: () {
                   setState(() {
@@ -108,6 +118,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
             );
           },
         ),
+        //For the save and continue button:
+        //creates bottom bar and programs the option to save.
         bottomSheet: GestureDetector(
           onTap: () {
             Navigator.pop(context);

@@ -18,10 +18,12 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
+//Stateful widget
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //This is the top bar
       appBar: AppBar(
         title: Text('Settings Page'),
         elevation: 1,
@@ -31,6 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
             color: Colors.white,
           ),
           onPressed: () {
+            //back button on the top bar.
             Navigator.pop(context);
           },
         ),
@@ -64,6 +67,8 @@ class _SettingsPageState extends State<SettingsPage> {
             title: 'Privacy',
             titlePadding: EdgeInsets.all(15),
             tiles: [
+              //Privacy tile that will take you privacy settings page.
+              //Users will have the option to make their acocunt public or private.
               SettingsTile(
                   title: 'Private Account',
                   leading: Icon(Icons.lock),
@@ -82,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   //Individual tiles
                   title: 'Change Alert',
                   leading: Icon(Icons.notifications),
-                  //tried to code this to pull out a drop down, doesn't work
+                  //takes user to the change notifications page.
                   onPressed: (context) {
                     Navigator.push(
                         context,
@@ -93,29 +98,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ],
       ),
-      //Here: I'm trying to display the profile picture above the settings page. Still working...
-      persistentFooterButtons: [
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  width: 4, color: Theme.of(context).scaffoldBackgroundColor),
-              boxShadow: [
-                BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    color: Colors.black.withOpacity(0.1),
-                    offset: Offset(0, 10))
-              ],
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
-                  ))),
-        )
-      ],
     );
   }
 }

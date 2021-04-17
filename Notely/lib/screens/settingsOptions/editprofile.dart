@@ -16,11 +16,13 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        //creates the top menu bar
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.tealAccent.shade400,
           elevation: 0.0,
           title: Text('Edit Profile'),
+          //If user wants to cancel changes:
           actions: <Widget>[
             FlatButton.icon(
                 icon: Icon(
@@ -33,6 +35,7 @@ class _EditProfileState extends State<EditProfile> {
                 })
           ],
         ),
+        //Creates the main container for the list.
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
@@ -40,6 +43,7 @@ class _EditProfileState extends State<EditProfile> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.0),
+                  //Text form for change email
                   TextFormField(
                     decoration: const InputDecoration(
                       icon: Icon(Icons.person),
@@ -47,11 +51,13 @@ class _EditProfileState extends State<EditProfile> {
                       labelText: 'Email',
                     ),
                     validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                    //Stores the newly changed value into variable 'email'.
                     onChanged: (val) {
                       setState(() => email = val);
                     },
                   ),
                   SizedBox(height: 20.0),
+                  //Form to change passwords (protected characters).
                   TextFormField(
                     decoration: const InputDecoration(
                       icon: Icon(Icons.person),
@@ -63,10 +69,12 @@ class _EditProfileState extends State<EditProfile> {
                         ? 'Enter a password over 6 characters long'
                         : null,
                     onChanged: (val) {
+                      //Stores the changed value into variable 'password'
                       setState(() => password = val);
                     },
                   ),
                   SizedBox(height: 20.0),
+                  //form to change major.
                   TextFormField(
                     decoration: const InputDecoration(
                       icon: Icon(Icons.person),
@@ -75,10 +83,12 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     obscureText: true,
                     onChanged: (val) {
+                      //stores the changes in variable 'major'
                       setState(() => major = val);
                     },
                   ),
                   SizedBox(height: 20.0),
+                  //button to set the changes.
                   RaisedButton(
                       color: Colors.tealAccent.shade400,
                       child:
