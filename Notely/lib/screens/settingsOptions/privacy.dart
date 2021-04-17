@@ -12,13 +12,13 @@ class Option {
 final options = [
   Option(
     icon: Icon(Icons.notification_important, size: 40.0),
-    title: 'Private Account',
+    title: 'Public Account',
     subtitle:
         'Anonymous user: Name cannot be searched for. Posts are anonymous.',
   ),
   Option(
     icon: Icon(Icons.notification_important_outlined, size: 40.0),
-    title: 'Public Account',
+    title: 'Private Account',
     subtitle:
         'People can search your name and see your posts. Your posts will have your username on them. ',
   ),
@@ -31,7 +31,7 @@ class PrivacyPage extends StatefulWidget {
 
 class _PrivacyPageState extends State<PrivacyPage> {
   int optionIndex = 0;
-
+  bool private = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +89,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
                 onTap: () {
                   setState(() {
                     optionIndex = index - 1;
+                    if (optionIndex == 0) {
+                      private = false;
+                    } else {
+                      private = true;
+                    }
                   });
                 },
               ),
