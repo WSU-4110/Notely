@@ -39,9 +39,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //Top bar with the back button.
+        //creates the top menu bar
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.tealAccent.shade700,
+          backgroundColor: Colors.tealAccent.shade400,
+          elevation: 0.0,
           title: Text('Privacy Settings'),
           leading: IconButton(
             icon: Icon(
@@ -125,7 +127,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
           child: Container(
             width: double.infinity,
             height: 80.0,
-            color: Colors.tealAccent.shade700,
+            color: Colors.tealAccent.shade400,
             child: Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: Row(

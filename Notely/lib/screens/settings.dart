@@ -1,3 +1,4 @@
+import 'package:Notely/screens/settingsOptions/change_language.dart';
 import 'package:Notely/screens/settingsOptions/editprofile.dart';
 import 'package:Notely/screens/settingsOptions/notificationsMenu.dart';
 import 'package:Notely/screens/settingsOptions/privacy.dart';
@@ -50,7 +51,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: 'Language',
                 subtitle: 'English',
                 leading: Icon(Icons.language),
-                onPressed: (context) {},
+                onPressed: (context) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LanguagePage()));
+                },
               ),
               SettingsTile(
                 title: 'Edit Profile',

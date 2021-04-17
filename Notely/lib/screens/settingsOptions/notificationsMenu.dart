@@ -51,9 +51,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //top menu bar.
+        //creates the top menu bar
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.tealAccent.shade700,
+          backgroundColor: Colors.tealAccent.shade400,
+          elevation: 0.0,
           title: Text('Notification Options'),
           leading: IconButton(
             icon: Icon(
@@ -127,7 +129,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           child: Container(
             width: double.infinity,
             height: 80.0,
-            color: Colors.tealAccent.shade700,
+            color: Colors.tealAccent.shade400,
             child: Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: Row(
