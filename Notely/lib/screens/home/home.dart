@@ -22,7 +22,6 @@ class MyHomePage extends StatefulWidget {
 
   final String title; //We should change this to hold our logo image file
   
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -33,8 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Postmaster primaryPostmaster = new Postmaster();
   final AuthService _auth = AuthService();
 
-  File
-      _image; //Will be used to store and reference the image taken or chosen by the user.
+  File _image; //Will be used to store and reference the image taken or chosen by the user.
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
@@ -67,9 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: searchBar.build(context),
-      
-
-
       body: ListView.separated //Creates a separated list of tiles to appear on the main page
             (
               itemBuilder: (BuildContext context, int index) //Creates items to appear in the list
@@ -87,14 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
               Divider(), //Creates divides between items, will probably be changed to spaces instead of lines later
         itemCount: primaryPostmaster.postList.length, //This will change to an infinite scroll later
       ),
-
-
-
-
-
-
-
-
       floatingActionButton: FloatingActionButton(
         onPressed: _openCamera,
         tooltip: 'Make post',
