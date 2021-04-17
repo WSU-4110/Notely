@@ -27,8 +27,11 @@ getUserInfo(User user) {
 //function from DatabaseService based on if more pictures were added to the post
 createPost(BuildContext context, String postTitle, String uid, List<File> images, List<String> tags) async {
   if(images.length == 0){
+
+    //Call to DatabaseService to create the post
     await DatabaseService().createPost(postTitle, imageToUpload, uid, tags);
   }else{
+    //If 1 or more pictures were added to the post, this function is used instead
     await DatabaseService().createMultiplePicPost(postTitle, imageToUpload, uid, images, tags);
   }
 }
@@ -42,22 +45,32 @@ class _CreatePostState extends State<CreatePost> {
 
   final _formKey = GlobalKey<FormState>();
 
+  //List holds the boxes for the images
   List<Widget> boxes = [];
+
+  //List holds the images themself
   List<File> images = [];
+
+  //List holds all the boxes for the tags
   List<Widget> tagBoxes = [];
 
   //Manager to keep a list of tags that will be used when uploading to database
   TagsManager tags = new TagsManager();
 
+
   String postTitle = '';
-  String error = '';
   String tag = '';
   int itemCount;
   File _image;
 
+  //Used to display an error if there is one
+  String error = '';
+
   //A picture has been added to the post. This function adds the picture to the boxes list so its displayed on screen.
   void addPicToBoxes(){
     setState(() {
+
+      //Insert new box at the beginning of the list
       boxes.insert(0,Card(
         child: InkWell(
           splashColor: Colors.tealAccent.shade400,
@@ -96,6 +109,8 @@ class _CreatePostState extends State<CreatePost> {
     setState(() {
       tags.removeTag(tagBoxes.length - 2);
       tagBoxes.removeAt(tagBoxes.length - 2);
+
+      //Check if this is the last tag in the list
       if(tagBoxes.length == 1){
         tagBoxes.removeAt(0);
       }
@@ -111,6 +126,8 @@ class _CreatePostState extends State<CreatePost> {
 
       //Checks to see if this is the first tag created
       if(tagBoxes.length == 0){
+
+        //Add the new tag to the end of the list
         tagBoxes.add(
           Card(
             color: Colors.tealAccent.shade400,
@@ -127,6 +144,8 @@ class _CreatePostState extends State<CreatePost> {
             ),
           ),
         );
+
+        //This tag has the delete functionality and is always present in the list
         tagBoxes.add(
           Padding(
             padding: EdgeInsets.only(top: 4),
@@ -146,6 +165,8 @@ class _CreatePostState extends State<CreatePost> {
             ),
           ),
         );
+
+        //Other tags already exist in the list
       }else if(tagBoxes.length >= 2){
         tagBoxes.insert(tagBoxes.length-1,
           Card(
@@ -171,6 +192,8 @@ class _CreatePostState extends State<CreatePost> {
   @override
   void initState() {
     super.initState();
+
+    //Add the blank box with the plus symbol that is used to add more pictures
     addInitialBox();
   }
 
@@ -191,6 +214,8 @@ class _CreatePostState extends State<CreatePost> {
           },
         ),
       ),
+
+      //Form for the whole create post system
       body: Form(
         key: _formKey,
         child: Column(
@@ -199,6 +224,7 @@ class _CreatePostState extends State<CreatePost> {
             Row(
               children: <Widget>[
                 Padding(padding: EdgeInsets.only(left: 10.0),),
+                //This container has the image the user just took from the home screen and displays it at the top left
                 Container(
                   child: Image.file(imageToUpload, width: 100, height: 100,),
                 ),
@@ -241,6 +267,7 @@ class _CreatePostState extends State<CreatePost> {
                             child: IconButton(
                               icon: Icon(Icons.add),
                               onPressed: () {
+                                //Function call to add a new tag box when the user adds a tag to the list
                                 addTagBox();
                               },
                             )
@@ -254,6 +281,7 @@ class _CreatePostState extends State<CreatePost> {
               ],
               ),
             Padding(padding: EdgeInsets.only(top: 10),),
+            //This displays the tag elements on the page
             Wrap(
               direction: Axis.horizontal,
               spacing: 10,
@@ -267,6 +295,7 @@ class _CreatePostState extends State<CreatePost> {
               endIndent: 10,
               color: Colors.tealAccent,
             ),
+            //This displays all the boxes with pictures on the page
             Wrap(
               direction: Axis.horizontal,
               spacing: 10,
@@ -280,11 +309,15 @@ class _CreatePostState extends State<CreatePost> {
               endIndent: 10,
               color: Colors.tealAccent,
             ),
+            //This is the button that creates the post when it is pressed
             ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent.shade400)),
                 onPressed: () async {
                   //INSERT LOADING WIDGET HERE *********************************************************************************
+                  //Function call to create the post. All the information is passed along
                   await createPost(context, postTitle, user.uid, images, tags.getTags());
+
+                  //After the post is finished being made, it navigated back to the home screen
                   Navigator.pop(context);
                 }, 
                 child: Text('Create Post'),
