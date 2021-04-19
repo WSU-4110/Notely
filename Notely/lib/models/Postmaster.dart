@@ -7,37 +7,13 @@ import 'dart:core';
 //This class is used to create and store post objects to be read from listview widgets.
 class Postmaster{
   List<Post> postList = []; //Holds the post objects that are read by the ListView Widget
-  String _collection = "TestPosts2";  //Name of directories we are reading from for easy access
-  String _subcollection = "TestSubCollection";
+  String _collection = "Posts";  //Name of directories we are reading from for easy access
+  String _subcollection = "UserPosts";
 
   //Main Constructor. Populates postList on creation
   Postmaster(){
-    print("Postmaster is alive!!!");
     getPosts();
-    print("Posts recieved!");
-    print("Number of post objects: " + postList.length.toString());
   }
-
-
-// getPosts() async {
-//     QuerySnapshot snapshot = await Firestore.instance.collection(_collection).getDocuments(); //Waits for response from server and gathers toplevel docs
-//     snapshot.documents.forEach((doc) {
-//       print("THIS IS THE CURRENT DOC IM LOOKING AT: " + doc.documentID);
-//       getSubDocs(doc.documentID); //Calls each individual document by its ID to access its subdocs
-//     });
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   //Accesses documents in database and populates postList with post objects from subdocs
   getPosts() async {
@@ -58,18 +34,13 @@ class Postmaster{
     });
   }
 
-  //For Testing: Retrieves a snapshot of data currently on database and prepares the data into post objects
-  // getPosts() async{
-  //   QuerySnapshot snapshot = await Firestore.instance.collection('TestPosts').getDocuments();
-  //   snapshot.documents.forEach((document) {
-  //     Post post = Post.fromMap(document.data);
-  //     postList.add(post);
-  //   });
+  //Will refresh posts in list when database changes
+  // refreshPosts(){
+  //   getPosts();
   // }
 
   // Clears the postList
   void clearPostList(){
     postList.clear();
   }
-
 }

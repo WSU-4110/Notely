@@ -55,12 +55,13 @@ class DatabaseService {
       urls.add(value);
     });
 
+    await postCollection.document(userId).setData({'verified': true}); //Adds a verification field so subcollections can be read
     //Create a document for the post and fill in all the data
     return await postCollection.document(userId).collection('UserPosts').add({
       'title': postTitle,
       'images': urls,
       'tags': tags,
-      'author': "Placeholder Username", //Julian, please make this work!
+      'author': "Placeholder Username",
       'date': DateTime.now().toString(),
       'reported': false,
     });
@@ -85,7 +86,7 @@ class DatabaseService {
         urls.add(value);
       });
     }
-
+    await postCollection.document(userId).setData({'verified': true}); //Adds a verification field so subcollections can be read
     //Create a document for the post and fill in all the data
     return await postCollection.document(userId).collection('UserPosts').add({
       'title': postTitle,

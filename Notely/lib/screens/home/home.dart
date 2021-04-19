@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Constructor for this instantiates searchBar
   _MyHomePageState() {
+    //primaryPostmaster = new Postmaster();
     searchBar = SearchBar(
         inBar: false,
         setState: setState,
@@ -46,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //Function that builds the appbar and returns it.
   AppBar buildAppBar(BuildContext context) {
     userInfo = Provider.of<User>(context);
+    //primaryPostmaster.refreshPosts();
     //This should contain the searchbar and hamburger button i think?
     return new AppBar(
       title: new Text('Notely',
