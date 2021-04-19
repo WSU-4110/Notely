@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer">
+  <title>Layer 1</title>
+  <polygon cx="19" cy="51" edge="0" fill="#FF0000" id="svg_2" orient="x" shape="regularPoly" sides="5" strokeWidth="5" strokecolor="#000000"/>
+  <polygon cx="19" cy="51" edge="0" fill="#FF0000" id="svg_3" orient="x" shape="regularPoly" sides="5" strokeWidth="5" strokecolor="none"/>
+  <polygon cx="446" cy="85" edge="0" fill="#FF0000" id="svg_5" orient="x" shape="regularPoly" sides="5" strokeWidth="5" strokecolor="none" transform="matrix(1 0 0 1 0 0)"/>
+  <g id="svg_10">
+   <circle cx="399.500003" cy="100.000001" fill="#000000" fill-opacity="0" id="svg_6" r="94.939043" stroke="#ffffff" stroke-width="5"/>
+   <circle cx="348.499999" cy="231.999996" fill="#000000" fill-opacity="0" id="svg_7" r="44.323608" stroke="#ffffff" stroke-width="5"/>
+  </g>
+  <g id="svg_11" transform="matrix(1 0 0 1 0 0) rotate(-0.0914951 207.326 141.387)">
+   <circle cx="207.132566" cy="100.694965" fill="#000000" fill-opacity="0" id="svg_12" r="95.693787" stroke="#ffffff" stroke-width="5"/>
+   <circle cx="258.538017" cy="232.694959" fill="#000000" fill-opacity="0" id="svg_13" r="44.675972" stroke="#ffffff" stroke-width="5"/>
+  </g>
+ </g>
+</svg>

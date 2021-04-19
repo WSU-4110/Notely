@@ -97,11 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+              child: Container(
+                child: Image(image: AssetImage("images/whiteButterfly.png"),),
               ),
               decoration: BoxDecoration(
                 color: Colors.tealAccent.shade400,
