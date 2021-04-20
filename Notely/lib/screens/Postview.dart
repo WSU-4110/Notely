@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Notely/models/Post.dart';
 
@@ -25,13 +26,23 @@ class _PostviewPageState extends State<PostviewPage> {
     post = _post;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(post.title),
         ),
+        body: Container(alignment: Alignment.topCenter,
+        child: Column(children: <Widget>[
+              Text("Title: " + post.title),
+              Text("Author: " + post.author),
+              Text("Date Published: " + post.date),
+              Text("Tags: " + post.tagsToString()),
+              for(int i = 0; i < post.images.length; i++)
+                Image.network(post.images[i])
+          ],
+         ),
+       )
     );
   }
 }
