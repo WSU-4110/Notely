@@ -13,6 +13,7 @@ class Postmaster{
   //Main Constructor. Populates postList on creation
   Postmaster(){
     getPosts();
+    removeReportedPosts();  //Will be used to remove reported posts if user toggles that setting
   }
 
   //Accesses documents in database and populates postList with post objects from subdocs
@@ -34,13 +35,27 @@ class Postmaster{
     });
   }
 
-  //Will refresh posts in list when database changes
-  // refreshPosts(){
-  //   getPosts();
-  // }
 
   // Clears the postList
   void clearPostList(){
     postList.clear();
   }
+
+    void removeReportedPosts(){
+    if (postList.isNotEmpty){
+      for (int i = 0; i < postList.length; ++i){
+          if (postList[i].reported == true)
+            postList.removeAt(i);
+      }
+    }
+  }
+
+  //gets post made by user
+  getUserPosts(){
+  }
+
+    //Will refresh posts in list when database changes
+  // refreshPosts(){
+  //   getPosts();
+  // }
 }
