@@ -51,7 +51,9 @@ class Postmaster{
   }
 
   //gets post made by user
-  getUserPosts(){
+  getUserPosts(userId) async {
+    clearPostList();
+    getSubDocs(userId);
   }
 
     //Will refresh posts in list when database changes

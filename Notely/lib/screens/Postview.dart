@@ -32,8 +32,9 @@ class _PostviewPageState extends State<PostviewPage> {
       appBar: AppBar(
         title: Text(post.title),
         ),
-        body: Container(alignment: Alignment.topCenter,
-        child: Column(children: <Widget>[
+        body:
+          ListView(shrinkWrap: true,
+            children: <Widget>[
               Text("Title: " + post.title),
               Text("Author: " + post.author),
               Text("Date Published: " + post.date),
@@ -42,7 +43,6 @@ class _PostviewPageState extends State<PostviewPage> {
                 Image.network(post.images[i])
           ],
          ),
-       )
     );
   }
 }
