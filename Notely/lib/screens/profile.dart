@@ -2,10 +2,11 @@ import 'package:Notely/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:Notely/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:Notely/screens/settingsOptions/editprofile.dart';
 
 class Profile {}
 
-openProfile(context, User user) {
+openProfile(context, User user) { //opens profile page from menu
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => ProfilePage()));
 }
@@ -19,8 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   User userInfo = new User(numberOfPosts: 0, username: '');
 
-  void getUserInfo(User user) async {
-    User info;
+  void getUserInfo(User user) async { //gets user information from the database
+    User info; 
     await DatabaseService(uid: user.uid).getUserData().then((value){
       info = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
       setState(() {
@@ -39,29 +40,29 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = Provider.of<User>(context);
     getUserInfo(user);
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( //displays the teal bar at the top of page
         title: Text('Profie Page'),
         elevation: 1,
-        leading: IconButton(
+        leading: IconButton( //'back' arrow that sends user to homepage when pressed
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
-          onPressed: (){
+          onPressed: (){ //sends user back to homepage
             Navigator.pop(context);
           },
         ),
       ),
-      body: Container(
+      body: Container( //contains all profile user information
         width: double.infinity,
         height: double.infinity,
         child: Column( //displays the user profile information as a whole
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start, //has column sit at top of page
+            crossAxisAlignment: CrossAxisAlignment.center, // has column sit in the center
             children: <Widget> [
               Container(
                 decoration: BoxDecoration(
-                  border: Border(
+                  border: Border( //creates the bottom border at the bottom of the profile information box
                     bottom: BorderSide(color: Colors.grey.shade400, width: 2, style: BorderStyle.solid),
                   ),
                 ),
@@ -77,42 +78,45 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Row(
                             children: <Widget> [
                               Container(
-                                height: 70,
-                                width: 150,
-                                alignment: Alignment.centerLeft,
+                                height: 70, //creates the height of the container containing the username
+                                width: 150,  //creates the width of the container containing the username
+                                alignment: Alignment.centerLeft, //sets the text to the left of the container and the center height-wise of the container
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 10, top: 10),
-                                  child: Text(
-                                  userInfo.username,
+                                  padding: EdgeInsets.only(left: 10, top: 10), //makes so the text isn't against the very edge
+                                  child: Text( //displays username
+                                  userInfo.username, //username from database
                                   style: TextStyle(fontSize: 22,),
                                   ),
                                 ),
                                 ),
                               Container( //displays follow button
-                                height: 70,
-                                width: 150,
+                                height: 70, //creates the hieght of the container containing the follow button
+                                width: 150, //creates the width of the container containing the follow button
                                 child: Container(
-                                  alignment: Alignment.centerLeft,
-                                  //margin: EdgeInsets.only(top: 10.0, bottom: 20.0, right: 30.0),
-                                  child: RawMaterialButton(
+                                  alignment: Alignment.centerLeft, 
+                                  child: RawMaterialButton( //the color of the button
                                     fillColor: Colors.tealAccent.shade400,
                                     splashColor: Colors.tealAccent.shade400,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 5.0, left: 10.0, right: 20.0, bottom: 5.0 ),
+                                    onPressed: () { //when pressed, the button takes user to profile page
+                                      Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => EditProfile()));
+                                    },
+                                    child: Padding( 
+                                      padding: EdgeInsets.only(top: 5.0, left: 10.0, right: 20.0, bottom: 5.0 ), //sizes the area arround the button so the button doesn't fill entire container
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: const[
                                           SizedBox(
                                             width: 15.0,
                                           ),
-                                          Text(
-                                            "Follow",
+                                          Text( //displays the button text
+                                            "Edit Profile",
                                             style: TextStyle(color: Colors.white, fontSize: 20),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), //makes the button a rectangle with rounded edges
                                   ),
                                 ),
                               ),
@@ -123,13 +127,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Row(
                               children: <Widget> [
                                 Container( //displays number of posts
-                                  height: 25,
-                                  width: 100,
+                                  height: 25, //height of the container displaying posts
+                                  width: 100, //width of the container displaying posts
                                   child: Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "69",
+                                  padding: EdgeInsets.only(left: 10), //this is so the text isn't at the very edge
+                                  child: RichText( 
+                                    text: TextSpan( //displays the number of posts
+                                      text: "70",
                                       style: TextStyle(color: Colors.black),
                                       children: <TextSpan>[
                                         TextSpan(text: " posts"),
@@ -139,10 +143,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 ),
                                 Container( //displays number of likes
-                                  height: 25,
-                                  width: 100,
+                                  height: 25, //height of the container displaying likes
+                                  width: 100, //width of the container displaying likes
                                   child: RichText(
-                                    text: TextSpan(
+                                    text: TextSpan( //displays the number of likes
                                       text: "420",
                                       style: TextStyle(color: Colors.black),
                                       children: <TextSpan>[
@@ -152,10 +156,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 Container( //displays number of followers
-                                  height: 25,
-                                  width: 100,
+                                  height: 25, //height of the container displaying followers
+                                  width: 100, //width of container displaying followers
                                   child: RichText(
-                                    text: TextSpan(
+                                    text: TextSpan( //displays the number of followers
                                       text: "13",
                                       style: TextStyle(color: Colors.black),
                                       children: <TextSpan>[
@@ -171,31 +175,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                     ),
                     Container( //displays users profile image
-                      height: 95,
-                      width: 75,
-                      child: Center(
+                      height: 95, //height of container displaying image
+                      width: 75, //width of container displaying image
+                      child: Center( //sets image in the center of the container
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(
+                          backgroundImage: NetworkImage( //displays image
                             "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
                           ),
-                          radius: 25,
+                          radius: 25, //size of the radius of the image
                           ),
                         ),
                       ),
                   ],
                 ),
                   ),
-                  Container(
-                height: 30,
-                width: 375,
+                  Container( //displays the name and school
+                height: 30, //height of container displaying name and school
+                width: 375, //width of container displaying name and school
                 child: RichText(
-                  text: TextSpan(
+                  text: TextSpan( //displays name and school
                     text: "Name ",
                     style: TextStyle(color: Colors.black, fontSize: 17),
                     children: [
                       WidgetSpan(child: Container( 
                         padding: EdgeInsets.only(bottom: 3,), 
-                        child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,),
+                        child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,), //creates an aesthetic circle to space apart the name and school
                         ),
                       ),
                       TextSpan(text: " School"),
@@ -203,9 +207,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              Container(
-                height: 50,
-                width: 375,
+              Container( //contains the about information of the user
+                height: 50, //height of the container displaying the about
+                width: 375, //width of the container displaying the about
                 child: Text("Mechanical Engineer, Junior, likes to bike and does competitive jump-roping"),
                 ),
                   ],
