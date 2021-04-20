@@ -38,9 +38,8 @@ class _PostviewPageState extends State<PostviewPage> {
               Text("Author: " + post.author),
               Text("Date Published: " + post.date),
               Text("Tags: " + post.tagsToString()),
-              Image.network(post.images[0]),
-              // Expanded(
-              //   child: Image.network(post.images[0]))
+              for(int i = 0; i < post.images.length; i++)
+                Image.network(post.images[i])
           ],
          ),
        )
