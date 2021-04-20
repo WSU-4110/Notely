@@ -26,7 +26,6 @@ class _PostviewPageState extends State<PostviewPage> {
     post = _post;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,15 +34,23 @@ class _PostviewPageState extends State<PostviewPage> {
         ),
         body: Container(alignment: Alignment.topCenter,
         child: Column(children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text("Author: " + post.author),
-              Text("Date Published: " + post.date),
-              Image.network(post.images[0]),
-              Text("Tags: " + post.tagsToString())
+            Row(children: <Widget>[
+              Expanded(
+              child: Image.network(post.images[0]),
+            ),
+            Expanded(
+              child: Text("Author: " + post.author),
+            ),
+            Expanded(
+              child: Text("Date Published: " + post.date),
+            ),
+            Expanded(
+              child: Text("Tags: " + post.tagsToString())
+            ),
           ],
-        )]
-        )
+         ),
+        ]
+       )
       )
     );
   }
