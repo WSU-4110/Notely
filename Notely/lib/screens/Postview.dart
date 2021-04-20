@@ -34,24 +34,16 @@ class _PostviewPageState extends State<PostviewPage> {
         ),
         body: Container(alignment: Alignment.topCenter,
         child: Column(children: <Widget>[
-            Row(children: <Widget>[
-              Expanded(
-              child: Image.network(post.images[0]),
-            ),
-            Expanded(
-              child: Text("Author: " + post.author),
-            ),
-            Expanded(
-              child: Text("Date Published: " + post.date),
-            ),
-            Expanded(
-              child: Text("Tags: " + post.tagsToString())
-            ),
+              Text("Title: " + post.title),
+              Text("Author: " + post.author),
+              Text("Date Published: " + post.date),
+              Text("Tags: " + post.tagsToString()),
+              Image.network(post.images[0]),
+              // Expanded(
+              //   child: Image.network(post.images[0]))
           ],
          ),
-        ]
        )
-      )
     );
   }
 }
