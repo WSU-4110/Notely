@@ -2,6 +2,7 @@ import 'package:Notely/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:Notely/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:Notely/screens/settingsOptions/editprofile.dart';
 
 class Profile {}
 
@@ -97,6 +98,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: RawMaterialButton(
                                     fillColor: Colors.tealAccent.shade400,
                                     splashColor: Colors.tealAccent.shade400,
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => EditProfile()));
+                                    },
                                     child: Padding(
                                       padding: EdgeInsets.only(top: 5.0, left: 10.0, right: 20.0, bottom: 5.0 ),
                                       child: Row(
@@ -106,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             width: 15.0,
                                           ),
                                           Text(
-                                            "Follow",
+                                            "Edit Profile",
                                             style: TextStyle(color: Colors.white, fontSize: 20),
                                           ),
                                         ],
