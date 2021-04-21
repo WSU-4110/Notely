@@ -20,10 +20,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void getUserInfo(User user) async {
     User info;
-    await DatabaseService(uid: user.uid).getUserData().then((value) {
-      info = new User(
-          username: value.data["name"],
-          numberOfPosts: value.data["numberOfPosts"]);
+
+    await DatabaseService(uid: user.uid).getUserData().then((value){
+      info = new User(username: value.data["username"], numberOfPosts: value.data["numberOfPosts"], name: value.data["name"], school: value.data["school"]);
+
       setState(() {
         userInfo = info;
       });
@@ -141,27 +141,25 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                //displays the number of posts, likes, and followers
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      //displays number of posts
-                                      height: 25,
-                                      width: 100,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            text: "69",
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                            children: <TextSpan>[
-                                              TextSpan(text: " posts"),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+
+                            ],
+                          ),
+                          ),
+                          Container( //displays the number of posts, likes, and followers
+                            child: Row(
+                              children: <Widget> [
+                                Container( //displays number of posts
+                                  height: 25,
+                                  width: 100,
+                                  child: Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: userInfo.getNumberOfPosts().toString(),
+                                      style: TextStyle(color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(text: " posts"),
+                                      ],
                                     ),
                                     Container(
                                       //displays number of likes
@@ -212,26 +210,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                     ),
-                  ),
-                  Container(
-                    height: 30,
-                    width: 375,
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Name ",
-                        style: TextStyle(color: Colors.black, fontSize: 17),
-                        children: [
-                          WidgetSpan(
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                bottom: 3,
-                              ),
-                              child: Icon(
-                                Icons.circle,
-                                size: 15,
-                                color: Colors.tealAccent.shade400,
-                              ),
-                            ),
+
+                    Container( //displays users profile image
+                      height: 95,
+                      width: 75,
+                      child: Center(
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            "https://pyxis.nymag.com/v1/imgs/a94/d93/a29f6dd865ae91425bb3b8289d4ba88cd9-01-dangelo-wallace-2.rvertical.w570.jpg",
+                          ),
+                          radius: 25,
+
                           ),
                           TextSpan(text: " School"),
                         ],
@@ -239,10 +228,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Container(
-                    height: 50,
-                    width: 375,
-                    child: Text(
-                        "Mechanical Engineer, Junior, likes to bike and does competitive jump-roping"),
+
+                height: 30,
+                width: 375,
+                child: RichText(
+                  text: TextSpan(
+                    text: userInfo.name,
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                    children: [
+                      WidgetSpan(child: Container( 
+                        padding: EdgeInsets.only(bottom: 3,), 
+                        child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,),
+                        ),
+                      ),
+                      TextSpan(text: userInfo.school),
+                    ],
                   ),
                 ],
               ),

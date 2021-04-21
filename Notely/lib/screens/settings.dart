@@ -117,7 +117,7 @@ class _SettingsPageState extends State<SettingsPage> {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
+                    "https://pyxis.nymag.com/v1/imgs/a94/d93/a29f6dd865ae91425bb3b8289d4ba88cd9-01-dangelo-wallace-2.rvertical.w570.jpg",
                   ))),
         )
       ],

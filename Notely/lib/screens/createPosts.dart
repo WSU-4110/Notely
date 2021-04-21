@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:Notely/services/tagsManager.dart';
 
 File imageToUpload;
-User userInfo; //This really needs to be moved to inside the class so it can be used properly
 
 //Function is used by the home screen to naviagte to the create a post screen
 openCreatePost(context, File image) {
@@ -16,20 +15,14 @@ openCreatePost(context, File image) {
       context, MaterialPageRoute(builder: (context) => CreatePost())); // Navigator to switch the user to Favorites Page screen
 }
 
-//Gets the user's information. This needs to be fixed
-getUserInfo(User user) {
-  DatabaseService(uid: user.uid).getUserData().then((value){
-    userInfo = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
-  });
-}
 
 //Function is called when the "Create Post" button is clicked. All the data is given and the function calls the corresponding
 //function from DatabaseService based on if more pictures were added to the post
 createPost(BuildContext context, String postTitle, String uid, List<File> images, List<String> tags) async {
   if(images.length == 0){
-    await DatabaseService().createPost(postTitle, imageToUpload, uid, tags);
+    await DatabaseService(uid: uid).createPost(postTitle, imageToUpload, uid, tags);
   }else{
-    await DatabaseService().createMultiplePicPost(postTitle, imageToUpload, uid, images, tags);
+    await DatabaseService(uid: uid).createMultiplePicPost(postTitle, imageToUpload, uid, images, tags);
   }
 }
 
@@ -43,17 +36,23 @@ class _CreatePostState extends State<CreatePost> {
   final _formKey = GlobalKey<FormState>();
 
   List<Widget> boxes = [];
-  List<File> images = [];
+  List<File>   images = [];
   List<Widget> tagBoxes = [];
 
   //Manager to keep a list of tags that will be used when uploading to database
-  TagsManager tags = new TagsManager();
+  TagsManager  tags = new TagsManager();
+  String       postTitle = '';
+  String       error = '';
+  String       tag = '';
+  int          itemCount;
+  File         _image;
+  User userInfo;
 
-  String postTitle = '';
-  String error = '';
-  String tag = '';
-  int itemCount;
-  File _image;
+  getUserInfo(User user) {
+  DatabaseService(uid: user.uid).getUserData().then((value){
+    userInfo = new User(username: value.data["username"], numberOfPosts: value.data["numberOfPosts"], name: value.data["name"], school: value.data["school"]);
+  });
+}
 
   //A picture has been added to the post. This function adds the picture to the boxes list so its displayed on screen.
   void addPicToBoxes(){
@@ -177,6 +176,7 @@ class _CreatePostState extends State<CreatePost> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    getUserInfo(user);
     return Scaffold(
       appBar: AppBar(
         title: Text('Create a new Post'),

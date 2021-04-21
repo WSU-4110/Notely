@@ -2,51 +2,71 @@
 class Post {
   //final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
   String title;
+  String uid;
+  String date; //Might make a class for date so we dont gotta parse
   String author;
-  String date; //Might make a class for date so we dont gotta parse, timestamp
-  
-  bool reported;  //Will eventually be used to filter in listview
+  List<String> tags;  
+  List<String> images;  //Might be a list of ids of images in the database and we stream em right to the phone?
+  bool reported;
 
-  List tags;  
-  List images;  //Might be a list of ids of images in the database and we stream em right to the phone?
+  Post.Julian({this.uid, this.title, this.date, this.tags, this.images});
 
-  //Post({this.uid}); //I think we would use the flutter thing key:uniquekey or something. 
-
-  //Constructor used to create posts from hardcoded data
-  Post (String _title, String _author, String _date, bool _reported, List _tags, List _images){
-    //uid = this.uid;
+  Post(String _title, String _author, String _date, bool _reported, List _tags, List _images){
     title = _title;
     author = _author;
     date = _date;
     reported = _reported;
     tags = _tags;
     images = _images;
+    } //I think we would use the flutter thing key:uniquekey or something. 
+
+
+
+  String getUID(){
+    return this.uid;
   }
 
-  //Constructor that creates posts from Map objects recieved by firebase documents
-  Post.fromMap(Map<String, dynamic> data) {
-    title = data['title'];
-    author = data['author'];
-    date = data['date'];
-    reported = data['reported'];
-    tags = data['tags'];
-    images = data['images'];
+  String getTitle(){
+    return this.title;
   }
 
-  //Returns a Map object from a post objects data to be used with firebase
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'id': id,
-  //     'name': name,
-  //     'category': category,
-  //     'image': image,
-  //     'subIngredients': subIngredients,
-  //     'createdAt': createdAt,
-  //     'updatedAt': updatedAt
-  //   };
-
-  String tagsToString(){
-    return tags.toString(); //The formatting could be changed to look better when read on listtiles
+  String setTitle(String newTitle){
+    this.title = newTitle;
+    return this.title;
   }
+
+  String getDate(){
+    return this.date;
+  }
+
+  String setDate(String newDate){
+    this.date = newDate;
+    return this.date;
+  }
+
+  List<String> getTags(){
+    return tags;
+  }
+
+  List<String> setTags(List<String> newTags){
+    this.tags = newTags;
+    return this.tags;
+  }
+
+  List<String> getImages(){
+    return this.images;
+  }
+
+  List<String> setImages(List<String> newImages){
+    this.images = newImages;
+    return this.images;
+  }
+
+    String tagsToString(){
+      return tags.toString(); //The formatting could be changed to look better when read on listtiles
+    }
+
 
 }
+
+
