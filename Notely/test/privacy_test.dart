@@ -10,6 +10,8 @@ import 'package:Notely/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+//Writen by Sheev Patel
+
 void main() {
   group('privacy.dart', () {
     test(
