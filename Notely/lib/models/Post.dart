@@ -9,16 +9,21 @@ class Post {
   List<String> images;  //Might be a list of ids of images in the database and we stream em right to the phone?
   bool reported;
 
-  Post.Julian({this.uid, this.title, this.date, this.tags, this.images});
 
-  Post(String _title, String _author, String _date, bool _reported, List _tags, List _images){
+
+  Post(String _title, String _author, String _date, bool _reported, List<String> _tags, List<String> _images){
     title = _title;
     author = _author;
     date = _date;
     reported = _reported;
     tags = _tags;
     images = _images;
-    } //I think we would use the flutter thing key:uniquekey or something. 
+  } //I think we would use the flutter thing key:uniquekey or something. 
+
+
+  Post.Julian({this.uid, this.title, this.date, this.tags, this.images});
+
+
 
 
 
