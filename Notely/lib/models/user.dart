@@ -1,4 +1,5 @@
 class User {
+
   String uid;
   dynamic username;
   dynamic numberOfPosts;
@@ -25,4 +26,5 @@ class User {
   set numPosts(dynamic numPosts){
     this.numberOfPosts = numPosts;
   }
+
 }

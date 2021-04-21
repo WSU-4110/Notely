@@ -18,6 +18,8 @@ class _RegisterState extends State<Register> {
   String password = '';
   String username ='';
   String error = '';
+  String name = '';
+  String school = '';
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +82,36 @@ class _RegisterState extends State<Register> {
                     },
                   ),
                   SizedBox(height: 20.0),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.person),
+                      hintText: 'Enter your name',
+                      labelText: 'Name',
+                    ),
+                    //validator: (val) => val.length < 4 ? 'Enter a username over 4 characters long' : null,
+                    onChanged: (val) {
+                      setState(() => name = val);
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.person),
+                      hintText: 'Enter your school name',
+                      labelText: 'School',
+                    ),
+                    //validator: (val) => val.length < 4 ? 'Enter a username over 4 characters long' : null,
+                    onChanged: (val) {
+                      setState(() => school = val);
+                    },
+                  ),
+                  SizedBox(height: 20.0),
                   RaisedButton(
                       color: Colors.tealAccent.shade400,
                       child: Text('Register', style: TextStyle(color: Colors.white,)),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          dynamic result = await _auth.registerWithEmailAndPassword(email, password, username);
+                          dynamic result = await _auth.registerWithEmailAndPassword(email, password, username, name, school);
                           if (result == null) {
                             setState(() => error = "Please supply a valid email");
                           }

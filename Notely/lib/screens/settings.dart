@@ -1,23 +1,26 @@
+import 'package:Notely/screens/settingsOptions/editprofile.dart';
+import 'package:Notely/screens/settingsOptions/notificationsMenu.dart';
+import 'package:Notely/screens/settingsOptions/privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart'; //Flutter Settings Package
 //Added under 'dependencies' in pubspec.yaml
 
-List<Icon> icons = [
-  Icon(Icons.person),
-  Icon(Icons.settings),
-  Icon(Icons.credit_card),
-];
+openSettings(context) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              SettingsPage())); // Navigator to switch the user to Favorites Page screen
+}
 
-Size buttonSize;
-Offset buttonPosition;
-bool isMenuOpen = false;
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
 
-class SettingsPage extends StatelessWidget {
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    bool privateAccountValue = false;
-    String dropdownValue = '';
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings Page'),
@@ -44,25 +47,32 @@ class SettingsPage extends StatelessWidget {
                 title: 'Language',
                 subtitle: 'English',
                 leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
+                onPressed: (context) {},
               ),
               SettingsTile(
-                title: 'Change Email',
-                leading: Icon(Icons.email_outlined),
-                onPressed: (BuildContext context) {
-                  //Code to change email will go here.
+                title: 'Edit Profile',
+                subtitle: 'Change email, name, major, etc.',
+                leading: Icon(Icons.edit),
+                onPressed: (context) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()));
                 },
               ),
-              SettingsTile(
-                title: 'Change Major',
-                leading: Icon(Icons.history_edu_outlined),
-                onPressed: (BuildContext context) {
-                  //Code to change major wll go here.
-                },
-              )
             ],
           ),
-
+          SettingsSection(
+            title: 'Privacy',
+            titlePadding: EdgeInsets.all(15),
+            tiles: [
+              SettingsTile(
+                  title: 'Private Account',
+                  leading: Icon(Icons.lock),
+                  onPressed: (context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PrivacyPage()));
+                  })
+            ],
+          ),
           //Another section
           SettingsSection(
             title: 'Notifications',
@@ -73,63 +83,14 @@ class SettingsPage extends StatelessWidget {
                   title: 'Change Alert',
                   leading: Icon(Icons.notifications),
                   //tried to code this to pull out a drop down, doesn't work
-                  onPressed: (BuildContext context) {
-                    Container(
-                      height: icons.length * buttonSize.height,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF67C0B9),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Theme(
-                        data: ThemeData(
-                          iconTheme: IconThemeData(
-                            color: Colors.white,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: List.generate(
-                            icons.length,
-                            (index) {
-                              return GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: buttonSize.width,
-                                  height: buttonSize.height,
-                                  child: icons[index],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    );
+                  onPressed: (context) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationsPage()));
                   }),
             ],
           ),
-
-          SettingsSection(
-              title: 'Privacy',
-              titlePadding: EdgeInsets.all(15),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: 'Private Account',
-                  leading: Icon(Icons.lock),
-                  switchValue: privateAccountValue,
-                  onToggle: (bool toggle) {
-                    //privateAccountValue is changed on user toggle. Important for later.
-                    if (toggle) {
-                      privateAccountValue = true;
-                      leading:
-                      Icon(Icons.ac_unit);
-                    } else {
-                      leading:
-                      Icon(Icons.local_airport_sharp);
-                      privateAccountValue = false;
-                    }
-                  },
-                ),
-              ])
         ],
       ),
       //Here: I'm trying to display the profile picture above the settings page. Still working...
@@ -151,12 +112,10 @@ class SettingsPage extends StatelessWidget {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
+                    "https://pyxis.nymag.com/v1/imgs/a94/d93/a29f6dd865ae91425bb3b8289d4ba88cd9-01-dangelo-wallace-2.rvertical.w570.jpg",
                   ))),
         )
       ],
     );
   }
-
-  void setState(Null Function() param0) {} // For future functionality
 }
