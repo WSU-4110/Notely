@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
+import 'package:Notely/models/user.dart';
 import 'package:Notely/screens/createPosts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,10 +20,12 @@ class DatabaseService {
   final CollectionReference userInfoCollection =
       Firestore.instance.collection('UserInfo');
 
-  Future updateUserData(String name) async {
+  Future updateUserData(String username, String name, String school, int numberOfPosts) async {
     return await userInfoCollection.document(uid).setData({
+      'username': username,
+      'numberOfPosts': numberOfPosts,
       'name': name,
-      'numberOfPosts': 0,
+      'school': school,
     });
   }
 
@@ -42,6 +45,12 @@ class DatabaseService {
     await downloadUrl.then((value) {
       urls.add(value);
     });
+    User userData;
+    await getUserData().then((value){
+      userData = new User(username: value.data["username"], numberOfPosts: value.data["numberOfPosts"], name: value.data["name"], school: value.data["school"]);
+    });
+    userData.incrementPosts();
+    await updateUserData(userData.username, userData.name, userData.school, userData.getNumberOfPosts());
     return await postCollection.document(userId).collection('UserPosts').add({
       'title': postTitle,
       'images': urls,
@@ -65,6 +74,12 @@ class DatabaseService {
         urls.add(value);
       });
     }
+    User userData;
+    await getUserData().then((value){
+      userData = new User(username: value.data["username"], numberOfPosts: value.data["numberOfPosts"], name: value.data["name"], school: value.data["school"]);
+    });
+    userData.incrementPosts();
+    await updateUserData(userData.username, userData.name, userData.school, userData.getNumberOfPosts());
     return await postCollection.document(userId).collection('UserPosts').add({
       'title': postTitle,
       'images': urls,

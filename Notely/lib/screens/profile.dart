@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void getUserInfo(User user) async {
     User info;
     await DatabaseService(uid: user.uid).getUserData().then((value){
-      info = new User(username: value.data["name"], numberOfPosts: value.data["numberOfPosts"]);
+      info = new User(username: value.data["username"], numberOfPosts: value.data["numberOfPosts"], name: value.data["name"], school: value.data["school"]);
       setState(() {
         userInfo = info;
       });
@@ -129,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   padding: EdgeInsets.only(left: 10),
                                   child: RichText(
                                     text: TextSpan(
-                                      text: "69",
+                                      text: userInfo.getNumberOfPosts().toString(),
                                       style: TextStyle(color: Colors.black),
                                       children: <TextSpan>[
                                         TextSpan(text: " posts"),
@@ -176,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Center(
                         child: CircleAvatar(
                           backgroundImage: NetworkImage(
-                            "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
+                            "https://pyxis.nymag.com/v1/imgs/a94/d93/a29f6dd865ae91425bb3b8289d4ba88cd9-01-dangelo-wallace-2.rvertical.w570.jpg",
                           ),
                           radius: 25,
                           ),
@@ -190,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: 375,
                 child: RichText(
                   text: TextSpan(
-                    text: "Name ",
+                    text: userInfo.name,
                     style: TextStyle(color: Colors.black, fontSize: 17),
                     children: [
                       WidgetSpan(child: Container( 
@@ -198,7 +198,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Icon(Icons.circle, size: 15, color: Colors.tealAccent.shade400,),
                         ),
                       ),
-                      TextSpan(text: " School"),
+                      TextSpan(text: userInfo.school),
                     ],
                   ),
                 ),
