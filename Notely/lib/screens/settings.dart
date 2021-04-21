@@ -3,8 +3,13 @@ import 'package:Notely/screens/settingsOptions/notificationsMenu.dart';
 import 'package:Notely/screens/settingsOptions/privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart'; //Flutter Settings Package
-//Added under 'dependencies' in pubspec.yaml
 
+bool privateAccount = false;
+int privateAccountindex = 0;
+int changeNotificationsIndex = 0;
+String newPassword, newEmail, newMajor = "";
+
+//Added under 'dependencies' in pubspec.yaml
 openSettings(context) {
   Navigator.push(
       context,

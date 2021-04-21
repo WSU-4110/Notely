@@ -1,3 +1,4 @@
+import 'package:Notely/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,14 +31,17 @@ class PrivacyPage extends StatefulWidget {
 }
 
 class _PrivacyPageState extends State<PrivacyPage> {
-  int optionIndex = 0;
+  int optionIndex = privateAccountindex;
 
   @override
   Widget build(BuildContext context) {
+    if (privateAccount) {
+      optionIndex = 0;
+    }
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.tealAccent.shade700,
-          title: Text('Menu Options'),
+          title: Text('Privacy Settings'),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,

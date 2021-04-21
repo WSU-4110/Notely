@@ -1,3 +1,4 @@
+import 'package:Notely/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -44,13 +45,14 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-  int optionIndex = 0;
+  int optionIndex = changeNotificationsIndex;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.tealAccent.shade700,
-          title: Text('Menu Options'),
+          title: Text('Notification Settings'),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -102,6 +104,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 onTap: () {
                   setState(() {
                     optionIndex = index - 1;
+                    print(optionIndex);
                   });
                 },
               ),
