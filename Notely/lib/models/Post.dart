@@ -1,7 +1,8 @@
-
+//This class is used to store data retrieved from database into a convenient object to be read by ListTiles
 class Post {
-  final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
+  //final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
   String title;
+
   String date; //Might make a class for date so we dont gotta parse
   List<String> tags;  
   List<String> images;  //Might be a list of ids of images in the database and we stream em right to the phone?
@@ -51,13 +52,8 @@ class Post {
 }
 
 
-//This is for a post view screen
-// import 'dart:html';
-// import 'package:flutter/material.dart';
-// class Post extends StatefulWidget{
-// }
-// class _post extends State<post> {
-//   @override
-//   Widget build(BuildContext context) {
-//   }
-// }
+  String tagsToString(){
+    return tags.toString(); //The formatting could be changed to look better when read on listtiles
+  }
+
+}
