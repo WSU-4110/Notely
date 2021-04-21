@@ -9,6 +9,7 @@ import 'package:Notely/screens/settings.dart';
 import 'package:Notely/screens/favorites.dart';
 import 'package:provider/provider.dart';
 import 'package:Notely/screens/profile.dart';
+import 'package:Notely/models/Post.dart';
 
 import 'package:Notely/screens/createPosts.dart';
 

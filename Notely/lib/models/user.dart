@@ -3,8 +3,11 @@ class User {
   String uid;
   dynamic username;
   dynamic numberOfPosts;
+  final dynamic name;
+  final dynamic school;
 
-  User({this.uid, this.username, this.numberOfPosts});
+
+  User({this.uid, this.username, this.numberOfPosts, this.name, this.school});
 
   String get userID{
     return uid;
@@ -25,6 +28,14 @@ class User {
   }
   set numPosts(dynamic numPosts){
     this.numberOfPosts = numPosts;
+  }
+
+  void incrementPosts(){
+    this.numberOfPosts++;
+  }
+
+  int getNumberOfPosts(){
+    return this.numberOfPosts;
   }
 
 }

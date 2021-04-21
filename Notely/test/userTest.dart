@@ -1,6 +1,8 @@
 import 'package:test/test.dart';
 import 'package:Notely/models/user.dart';
 
+//Written by:
+
 void main(){
   //----------------------Getters and setters for userID------------------------
   test('User ID setter should correctly set uid data', () async {

@@ -16,7 +16,7 @@ void main() {
   test('Post should return user ID of 123456789', () async {
     // ARRANGE
     List<String> tags, images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
 
     // ASSERT
@@ -26,7 +26,7 @@ void main() {
   test('Post should return title name of Post Title', () async {
     // ARRANGE
     List<String> tags, images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
 
     // ASSERT
@@ -36,7 +36,7 @@ void main() {
   test('Post set the title to new value "new title" and then return "new title"', () async {
     // ARRANGE
     List<String> tags, images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
 
     // ASSERT
@@ -46,7 +46,7 @@ void main() {
   test('Post should return the date it was created: 01/29/2020', () async {
     // ARRANGE
     List<String> tags, images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
 
     // ASSERT
@@ -56,7 +56,7 @@ void main() {
   test('Post update date to "04/11/2021" and return "04/11/2021"', () async {
     // ARRANGE
     List<String> tags, images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
 
     // ASSERT
@@ -67,7 +67,7 @@ void main() {
     // ARRANGE
     List<String> tags = ["Hello", "World"];
     List<String> images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
   
     // ASSERT
@@ -78,7 +78,7 @@ void main() {
     // ARRANGE
     List<String> tags = ["Hello", "World"];
     List<String> images;
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
     List<String> newTags = ["Goodbye", "Everyone"];
     // ASSERT
@@ -89,7 +89,7 @@ void main() {
     // ARRANGE
     List<String> tags;
     List<String> images = ['image1', 'image2'];
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
 
     // ASSERT
@@ -100,7 +100,7 @@ void main() {
     // ARRANGE
     List<String> tags;
     List<String> images = ['image1', 'image2'];
-    Post post = new Post(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
+    Post post = new Post.Julian(uid: "123456789", title: "Post Title", date: "01/29/2020", tags: tags, images: images);
     // ACT
     List<String> newImages = ['image3', 'image4'];
     // ASSERT

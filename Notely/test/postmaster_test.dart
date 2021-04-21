@@ -3,6 +3,8 @@ import 'package:Notely/models/Post.dart';
 import 'package:test/test.dart';
 import 'dart:math';
 
+//Written by: Christian Anthony
+
 void main() {
 
   test('loadTestPosts() should populate postList', () {

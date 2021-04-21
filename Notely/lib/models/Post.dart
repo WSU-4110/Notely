@@ -2,12 +2,25 @@
 class Post {
   //final String uid; //These Ids need to be generated on creation or maybe given when put into firebase
   String title;
-
+  String uid;
   String date; //Might make a class for date so we dont gotta parse
+  String author;
   List<String> tags;  
   List<String> images;  //Might be a list of ids of images in the database and we stream em right to the phone?
+  bool reported;
 
-  Post({this.uid, this.title, this.date, this.tags, this.images}); //I think we would use the flutter thing key:uniquekey or something. 
+  Post.Julian({this.uid, this.title, this.date, this.tags, this.images});
+
+  Post(String _title, String _author, String _date, bool _reported, List _tags, List _images){
+    title = _title;
+    author = _author;
+    date = _date;
+    reported = _reported;
+    tags = _tags;
+    images = _images;
+    } //I think we would use the flutter thing key:uniquekey or something. 
+
+
 
   String getUID(){
     return this.uid;
@@ -49,11 +62,11 @@ class Post {
     return this.images;
   }
 
+    String tagsToString(){
+      return tags.toString(); //The formatting could be changed to look better when read on listtiles
+    }
+
+
 }
 
 
-  String tagsToString(){
-    return tags.toString(); //The formatting could be changed to look better when read on listtiles
-  }
-
-}
