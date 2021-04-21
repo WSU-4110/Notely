@@ -1,18 +1,30 @@
 class User {
-  final String uid;
-  final dynamic username;
-  int numberOfPosts;
-  final dynamic name;
-  final dynamic school;
 
-  User({this.uid, this.username, this.numberOfPosts, this.name, this.school});
+  String uid;
+  dynamic username;
+  dynamic numberOfPosts;
 
-  void incrementPosts(){
-    this.numberOfPosts++;
+  User({this.uid, this.username, this.numberOfPosts});
+
+  String get userID{
+    return uid;
+  }
+  set userID(String userID){
+    this.uid = userID;
   }
 
-  int getNumberOfPosts(){
-    return this.numberOfPosts;
+  dynamic get uName{
+    return username;
+  }
+  set uName(dynamic uName){
+    this.username = uName;
+  }
+
+  dynamic get numPosts{
+    return numberOfPosts;
+  }
+  set numPosts(dynamic numPosts){
+    this.numberOfPosts = numPosts;
   }
 
 }
