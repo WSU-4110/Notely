@@ -1,9 +1,8 @@
 language: dart
-dart:
-  script:
-    - Notely/test/Post_test.dart
-    - Notely/test/Post_test.dart
-    - Notely/test/Postmaster_test.dart
-    - Notely/test/privacy_test.dart
-    - Notely/test/ToTest_test.dart
-    - Notely/test/user_test.dart
+script:
+  - Notely/test/Post_test.dart
+  - Notely/test/Post_test.dart
+  - Notely/test/Postmaster_test.dart
+  - Notely/test/privacy_test.dart
+  - Notely/test/ToTest_test.dart
+  - Notely/test/user_test.dart
