@@ -1,8 +1,9 @@
 language: dart
 dart_task:
-  test: --platform vm (Notely/test/Post_test.dart)
-  test: dart (Notely/test/Post_test.dart)
-  test: dart (Notely/test/Postmaster_test.dart)
-  test: dart (Notely/test/privacy_test.dart)
-  test: dart (Notely/test/ToTest_test.dart)
-  test: dart (Notely/test/user_test.dart)
+  test: --platform vm
+    - (Notely/test/Post_test.dart)
+    - dart (Notely/test/Post_test.dart)
+    - dart (Notely/test/Postmaster_test.dart)
+    - dart (Notely/test/privacy_test.dart)
+    - dart (Notely/test/ToTest_test.dart)
+    - dart (Notely/test/user_test.dart)
