@@ -1,4 +1,5 @@
 language: dart
+dart:
   script:
     - Notely/test/Post_test.dart
     - Notely/test/Post_test.dart
