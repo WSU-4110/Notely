@@ -1,10 +1,11 @@
 language: dart
 dart:
-  - "stable"
-script:
-  - run Notely/test/Post_test.dart
-  - run Notely/test/Post_test.dart
-  - run Notely/test/Postmaster_test.dart
-  - run Notely/test/privacy_test.dart
-  - run Notely/test/ToTest_test.dart
-  - run Notely/test/user_test.dart
+  - stable
+dart_task:
+  - test: 
+    - Notely/test/Post_test.dart
+    - Notely/test/Post_test.dart
+    - Notely/test/Postmaster_test.dart
+    - Notely/test/privacy_test.dart
+    - Notely/test/ToTest_test.dart
+    - Notely/test/user_test.dart
